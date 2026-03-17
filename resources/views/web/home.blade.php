@@ -53,7 +53,7 @@
 </div>
 
 <!-- Search Form -->
-<div class="card card-shadow rounded-4 mb-4">
+<div class="card card-shadow rounded-4 mb-4 mt-5">
     <div class="card-body p-4">
         <form method="GET" action="{{ route('home') }}" class="row g-3" id="searchForm">
             <div class="col-md-5">
