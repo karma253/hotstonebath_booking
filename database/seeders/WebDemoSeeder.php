@@ -175,7 +175,7 @@ class WebDemoSeeder extends Seeder
             $services = [
                 [
                     'service_type' => 'Traditional Hotstone Bath',
-                    'description' => 'Classic hot stone bath experience with traditional heated river stones. Perfect for experiencing authentic Bhutanese wellness traditions. Available at ' . $data['name'] . ', ' . optional($bath->dzongkhag)->name . '.',
+                    'description' => 'A traditional hot stone bath is a natural way of bathing where heated stones are placed in water to make it warm. People sit in the warm water to relax their body and relieve stress or body pain. Sometimes herbs are added to make it more soothing. It is simple, relaxing, and good for health.',
                     'duration_minutes' => 60,
                     'price' => $data['price'],
                     'max_guests' => $data['max_guests'],
