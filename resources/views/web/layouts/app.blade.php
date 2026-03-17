@@ -57,14 +57,128 @@
         .card-shadow {
             box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
             border: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-shadow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .card-shadow:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.18),
+                0 0 40px rgba(139, 31, 31, 0.1);
+            border-color: transparent;
+        }
+
+        .card-shadow:hover::before {
+            opacity: 1;
+        }
+
+        .card-shadow .card-img-top {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: brightness(1) saturate(1);
+        }
+
+        .card-shadow:hover .card-img-top {
+            filter: brightness(1.15) saturate(1.2);
+            transform: scale(1.1);
+        }
+
+        .card-shadow .card-title,
+        .card-shadow .card-body p {
+            transition: all 0.3s ease;
+        }
+
+        .card-shadow:hover .card-title {
+            color: #8d1f1f;
+            transform: translateX(4px);
+        }
+
+        .card-shadow .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-shadow .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card-shadow .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-shadow .btn:active::before {
+            width: 300px;
+            height: 300px;
         }
         .bath-thumb {
             height: 220px;
             object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+
+        .card:hover .bath-thumb {
+            filter: brightness(1.2) saturate(1.3);
+            transform: scale(1.15) rotate(2deg);
+        }
+
         .section-title {
             color: #7b1c1c;
             letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+        }
+
+        .card-shadow:active {
+            transform: translateY(-6px) scale(1.01);
+        }
+
+        .card:has(> img) {
+            cursor: pointer;
+        }
+
+        /* Badge and price animations */
+        .badge {
+            transition: all 0.3s ease;
+        }
+
+        .card-shadow:hover .badge {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Price highlight */
+        .text-danger {
+            transition: all 0.3s ease;
+        }
+
+        .card-shadow:hover .text-danger {
+            transform: scale(1.1);
+            text-shadow: 0 2px 8px rgba(198, 54, 44, 0.3);
         }
         .bhutan-chip {
             display: inline-flex;
