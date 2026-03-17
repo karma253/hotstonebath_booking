@@ -21,37 +21,6 @@
     </div>
 </div>
 
-<div class="my-5">
-    <h2 class="h3 section-title mb-4">Featured Bath Services</h2>
-    <div class="row g-4">
-        @forelse ($featuredServices as $service)
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="card card-shadow rounded-4 h-100">
-                    <img
-                        src="{{ $serviceImages[$service->service_type] ?? 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500' }}"
-                        class="card-img-top"
-                        alt="{{ $service->service_type }}"
-                        style="height: 200px; object-fit: cover;"
-                    >
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title mb-1">{{ $service->service_type }}</h5>
-                        <p class="text-muted small mb-2">{{ optional($service->bath->dzongkhag)->name }}</p>
-                        <p class="small text-secondary mb-3">{{ Str::limit($service->description, 60) }}</p>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="fw-semibold text-danger">Nu. {{ number_format((float) $service->price, 2) }}</span>
-                            <span class="badge bg-light text-dark">{{ $service->duration_minutes }}m</span>
-                        </div>
-                        <a href="{{ route('baths.show', ['bath' => $service->bath, 'service' => $service->service_type]) }}" class="btn btn-sm btn-outline-dark mt-auto">View Details</a>
-                    </div>
-                </div>
-            </div>
-        @empty
-            <div class="col-12">
-                <p class="text-muted">Featured services will appear here soon.</p>
-            </div>
-        @endforelse
-</div>
-
 <!-- Search Form -->
 <div class="card card-shadow rounded-4 mb-4 mt-5">
     <div class="card-body p-4">
