@@ -28,8 +28,8 @@
 
         <div class="card card-shadow rounded-4 mb-4">
             <div class="card-body p-4">
-                <h2 class="h4 mb-3">Bath Experience</h2>
-                <p class="mb-0">{{ $bath->detailed_description ?: $bath->short_description }}</p>
+                <h2 class="h4 mb-3">Our Story</h2>
+                <p class="mb-0">Hot stone bathing is an ancient wellness tradition passed down through generations in Bhutan. For centuries, locals have discovered that when smooth river stones are heated by fire and placed in water, they create a naturally warm therapeutic bath. This simple yet powerful practice brings warmth to the body, eases tension, and promotes deep relaxation. When herbal blends are added to the water, the benefits multiply—soothing muscles, relieving stress, and restoring balance to both mind and body. Today, we continue this time-honored tradition, offering visitors a genuine connection to Bhutanese wellness practices and the timeless healing power of nature.</p>
             </div>
         </div>
 
