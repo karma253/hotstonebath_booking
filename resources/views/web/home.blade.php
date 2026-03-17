@@ -50,18 +50,12 @@
                 <p class="text-muted">Featured services will appear here soon.</p>
             </div>
         @endforelse
-    </div>
-    <div class="mt-4">
-        <a href="#all-baths" class="text-decoration-none d-inline-flex align-items-center" style="color: #212529; font-weight: 500; transition: all 0.3s ease;">
-            <span class="me-2">See More</span>
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.95rem;"></i>
-        </a>
-    </div>
 </div>
 
+<!-- Search Form -->
 <div class="card card-shadow rounded-4 mb-4">
     <div class="card-body p-4">
-        <form method="GET" action="{{ route('home') }}" class="row g-3">
+        <form method="GET" action="{{ route('home') }}" class="row g-3" id="searchForm">
             <div class="col-md-5">
                 <label class="form-label">Search by bath name or location</label>
                 <input type="text" class="form-control" name="keyword" value="{{ request('keyword') }}" placeholder="Search baths...">
@@ -85,7 +79,48 @@
     </div>
 </div>
 
-<div id="all-baths" class="row g-4">
+<!-- Featured Services - Hidden Initially -->
+<div id="featuredSection" class="my-5" @if(!request('keyword') && !request('dzongkhag_id'))style="display: none;"@endif>
+    <h2 class="h3 section-title mb-4">Featured Bath Services</h2>
+    <div class="row g-4">
+        @forelse ($featuredServices as $service)
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card card-shadow rounded-4 h-100">
+                    <img
+                        src="{{ $serviceImages[$service->service_type] ?? 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500' }}"
+                        class="card-img-top"
+                        alt="{{ $service->service_type }}"
+                        style="height: 200px; object-fit: cover;"
+                    >
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-1">{{ $service->service_type }}</h5>
+                        <p class="text-muted small mb-2">{{ optional($service->bath->dzongkhag)->name }}</p>
+                        <p class="small text-secondary mb-3">{{ Str::limit($service->description, 60) }}</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="fw-semibold text-danger">Nu. {{ number_format((float) $service->price, 2) }}</span>
+                            <span class="badge bg-light text-dark">{{ $service->duration_minutes }}m</span>
+                        </div>
+                        <a href="{{ route('baths.show', ['bath' => $service->bath, 'service' => $service->service_type]) }}" class="btn btn-sm btn-outline-dark mt-auto">View Details</a>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12">
+                <p class="text-muted">Featured services will appear here soon.</p>
+            </div>
+        @endforelse
+    </div>
+    <div class="mt-4">
+        <a href="#all-baths" class="text-decoration-none d-inline-flex align-items-center" style="color: #212529; font-weight: 500; transition: all 0.3s ease;">
+            <span class="me-2">See More</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.95rem;"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Search Results - Hidden Initially -->
+<div id="resultsSection" @if(!request('keyword') && !request('dzongkhag_id'))style="display: none;"@endif>
+    <div id="all-baths" class="row g-4">
     @forelse ($baths as $bath)
         <div class="col-md-6 col-lg-4">
             <div class="card card-shadow rounded-4 h-100">
@@ -111,10 +146,11 @@
             <div class="alert alert-warning">No bath listings found for the selected filters.</div>
         </div>
     @endforelse
-</div>
+    </div>
 
-<div class="mt-4">
-    {{ $baths->links() }}
+    <div class="mt-4">
+        {{ $baths->links() }}
+    </div>
 </div>
 
 <div id="how-to-book" class="card card-shadow rounded-4 mt-4">
@@ -160,19 +196,74 @@
     </div>
 </div>
 
+@push('styles')
+<style>
+    #featuredSection,
+    #resultsSection {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    #searchForm {
+        background: linear-gradient(135deg, rgba(240, 196, 108, 0.08) 0%, rgba(255, 255, 255, 0.4) 100%);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(240, 196, 108, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    #searchForm:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        border-color: rgba(240, 196, 108, 0.35);
+    }
+</style>
+@endpush
+
 <script>
-    // Auto-scroll to search results if dzongkhag filter is applied
+    // Show/hide sections based on search
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('dzongkhag_id') && urlParams.get('dzongkhag_id') !== '') {
-            // Scroll to the search results section
-            const allBathsSection = document.getElementById('all-baths');
-            if (allBathsSection) {
+        const keyword = urlParams.get('keyword');
+        const dzongkhagId = urlParams.get('dzongkhag_id');
+        const hasSearch = keyword || dzongkhagId;
+
+        const featuredSection = document.getElementById('featuredSection');
+        const resultsSection = document.getElementById('resultsSection');
+
+        if (hasSearch) {
+            // Hide featured, show results
+            if (featuredSection) featuredSection.style.display = 'none';
+            if (resultsSection) {
+                resultsSection.style.display = 'block';
+                // Scroll to results
                 setTimeout(function() {
-                    allBathsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
             }
+        } else {
+            // Show featured, hide results
+            if (featuredSection) featuredSection.style.display = 'block';
+            if (resultsSection) resultsSection.style.display = 'none';
         }
+    });
+
+    // Update display when form is submitted
+    document.getElementById('searchForm').addEventListener('submit', function() {
+        const featuredSection = document.getElementById('featuredSection');
+        const resultsSection = document.getElementById('resultsSection');
+        if (featuredSection) featuredSection.style.display = 'none';
+        if (resultsSection) resultsSection.style.display = 'block';
     });
 </script>
 @endsection
+
