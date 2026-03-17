@@ -78,7 +78,7 @@ class WebDemoSeeder extends Seeder
             [
                 'dzongkhag_name' => 'Paro',
                 'name' => 'Paro Traditional Hot Stone Bath',
-                'short_description' => 'Authentic river-stone heated bath with herbal blend.',
+                'short_description' => 'Experience natural hot stone bathing where heated stones warm the water creating a peaceful healing environment. Herbal blends enhance relaxation and wellness benefits.',
                 'full_address' => 'Taktsang Road, Paro',
                 'price' => 900,
                 'max_guests' => 6,
