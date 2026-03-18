@@ -79,10 +79,10 @@
             </div>
         @endforelse
     </div>
-    <div class="mt-4">
-        <button id="toggleServicesBtn" class="text-decoration-none d-inline-flex align-items-center" style="color: #212529; font-weight: 500; transition: all 0.3s ease; background: none; border: none; cursor: pointer; padding: 0;">
-            <span class="me-2" id="toggleServicesText">See More</span>
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.95rem;"></i>
+    <div class="mt-4 d-flex justify-content-end">
+        <button id="toggleServicesBtn" class="toggle-services-btn">
+            <span id="toggleServicesText">See More</span>
+            <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>
 </div>
@@ -184,25 +184,34 @@
     }
 
     #toggleServicesBtn {
-        padding: 0;
-        font-weight: 500;
-        color: #212529;
-        background: none;
-        border: none;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        color: white;
+        background-color: #212529;
+        border: 2px solid #212529;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         display: inline-flex;
         align-items: center;
+        gap: 0.5rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
     }
 
     #toggleServicesBtn:hover {
-        color: #e74c3c;
-        transform: translateX(4px);
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(231, 76, 60, 0.3);
+    }
+
+    #toggleServicesBtn i {
+        font-size: 0.85rem;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     #toggleServicesBtn:hover i {
         transform: translateX(4px);
-        transition: transform 0.3s ease;
     }
 
     .service-card {
