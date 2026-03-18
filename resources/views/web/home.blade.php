@@ -51,9 +51,9 @@
 <!-- Featured Services - Hidden Initially -->
 <div id="featuredSection" class="my-5" @if(!request('keyword') && !request('dzongkhag_id'))style="display: none;"@endif>
     <h2 class="h3 section-title mb-4">Featured Bath Services</h2>
-    <div class="row g-4">
+    <div class="row g-4" id="servicesContainer">
         @forelse ($featuredServices as $service)
-            <div class="col-6 col-md-4 col-lg-3">
+            <div class="col-6 col-md-4 col-lg-3 service-card" data-index="{{ $loop->index }}">
                 <div class="card card-shadow rounded-4 h-100">
                     <img
                         src="{{ $serviceImages[$service->service_type] ?? 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500' }}"
@@ -80,10 +80,10 @@
         @endforelse
     </div>
     <div class="mt-4">
-        <a href="#all-baths" class="text-decoration-none d-inline-flex align-items-center" style="color: #212529; font-weight: 500; transition: all 0.3s ease;">
-            <span class="me-2">See More</span>
+        <button id="toggleServicesBtn" class="text-decoration-none d-inline-flex align-items-center" style="color: #212529; font-weight: 500; transition: all 0.3s ease; background: none; border: none; cursor: pointer; padding: 0;">
+            <span class="me-2" id="toggleServicesText">See More</span>
             <i class="fa-solid fa-arrow-right" style="font-size: 0.95rem;"></i>
-        </a>
+        </button>
     </div>
 </div>
 
@@ -183,6 +183,32 @@
         }
     }
 
+    #toggleServicesBtn {
+        padding: 0;
+        font-weight: 500;
+        color: #212529;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    #toggleServicesBtn:hover {
+        color: #e74c3c;
+        transform: translateX(4px);
+    }
+
+    #toggleServicesBtn:hover i {
+        transform: translateX(4px);
+        transition: transform 0.3s ease;
+    }
+
+    .service-card {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
     #searchForm {
         background: linear-gradient(135deg, rgba(240, 196, 108, 0.08) 0%, rgba(255, 255, 255, 0.4) 100%);
         padding: 1.5rem;
@@ -199,6 +225,44 @@
 @endpush
 
 <script>
+    // Hide cards with index >= 4 initially
+    document.addEventListener('DOMContentLoaded', function() {
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(function(card, index) {
+            if (index >= 4) {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Toggle show more/less functionality
+    document.getElementById('toggleServicesBtn').addEventListener('click', function() {
+        const serviceCards = document.querySelectorAll('.service-card');
+        const toggleText = document.getElementById('toggleServicesText');
+        let isExpanded = false;
+
+        // Check if cards 4+ are visible
+        for (let i = 4; i < serviceCards.length; i++) {
+            if (serviceCards[i].style.display !== 'none') {
+                isExpanded = true;
+                break;
+            }
+        }
+
+        // Toggle visibility
+        serviceCards.forEach(function(card, index) {
+            if (index >= 4) {
+                if (isExpanded) {
+                    card.style.display = 'none';
+                    toggleText.textContent = 'See More';
+                } else {
+                    card.style.display = 'block';
+                    toggleText.textContent = 'See Less';
+                }
+            }
+        });
+    });
+
     // Show/hide sections based on search
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
