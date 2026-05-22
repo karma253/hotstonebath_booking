@@ -164,13 +164,26 @@
                     </div>
 
         
-                                @endif
-                            </div>
-                        </div>
-                    @else
-                        <div class="mt-3 muted-small">No owner-added service has been added yet.</div>
-                    @endif
+                    </div>
+                    </div>
                 </div>
+
+                @if($latestOwnerService)
+                    <div id="service-overview" class="mt-3 service-card d-flex gap-3 align-items-start">
+                        @if($latestOwnerServiceImage)
+                            <div style="width:110px;flex:0 0 110px;"><img src="{{ asset('storage/' . ltrim($latestOwnerServiceImage, '/')) }}" style="width:100%;height:82px;object-fit:cover;border-radius:8px;"></div>
+                        @endif
+                        <div>
+                            <div class="h6 mb-1">{{ $latestOwnerService->name ?? 'Service' }}</div>
+                            <div class="small text-muted">Nu. {{ number_format((float) ($latestOwnerService->price ?? $latestOwnerService->final_price ?? 0), 2) }}</div>
+                            <div class="muted-small mt-2">{{ \Illuminate\Support\Str::limit($latestOwnerService->description ?? '', 140) }}</div>
+                            <input type="hidden" name="owner_service_id" value="{{ $latestOwnerService->id }}">
+                        </div>
+                    </div>
+                @else
+                    <div class="mt-3 muted-small">No owner-added service has been added yet.</div>
+                @endif
+            </div>
 
                 <div class="assign-step">
                     <div class="step-header">
