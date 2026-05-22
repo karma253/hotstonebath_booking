@@ -132,13 +132,9 @@
             <p class="mt-2 small text-muted">Upload up to 10 images. Allowed formats: JPG, JPEG, PNG, WEBP.</p>
         </div>
 
-        
-
-        </div>
-
-        
-
         <div class="card mt-3">
+    <aside class="details-right">
+        <div class="card">
             <h5>Assign Inspection to Staff</h5>
             @php
                 $servicesList = $servicesList ?? ($services ?? $bath->services ?? collect());
@@ -163,23 +159,22 @@
                         </div>
                     </div>
 
-        
-                @if($latestOwnerService)
-                    <div id="service-overview" class="mt-3 service-card d-flex gap-3 align-items-start">
-                        @if($latestOwnerServiceImage)
-                            <div style="width:110px;flex:0 0 110px;"><img src="{{ asset('storage/' . ltrim($latestOwnerServiceImage, '/')) }}" style="width:100%;height:82px;object-fit:cover;border-radius:8px;"></div>
-                        @endif
-                        <div>
-                            <div class="h6 mb-1">{{ $latestOwnerService->name ?? 'Service' }}</div>
-                            <div class="small text-muted">Nu. {{ number_format((float) ($latestOwnerService->price ?? $latestOwnerService->final_price ?? 0), 2) }}</div>
-                            <div class="muted-small mt-2">{{ \Illuminate\Support\Str::limit($latestOwnerService->description ?? '', 140) }}</div>
-                            <input type="hidden" name="owner_service_id" value="{{ $latestOwnerService->id }}">
+                    @if($latestOwnerService)
+                        <div id="service-overview" class="mt-3 service-card d-flex gap-3 align-items-start">
+                            @if($latestOwnerServiceImage)
+                                <div style="width:110px;flex:0 0 110px;"><img src="{{ asset('storage/' . ltrim($latestOwnerServiceImage, '/')) }}" style="width:100%;height:82px;object-fit:cover;border-radius:8px;"></div>
+                            @endif
+                            <div>
+                                <div class="h6 mb-1">{{ $latestOwnerService->name ?? 'Service' }}</div>
+                                <div class="small text-muted">Nu. {{ number_format((float) ($latestOwnerService->price ?? $latestOwnerService->final_price ?? 0), 2) }}</div>
+                                <div class="muted-small mt-2">{{ \Illuminate\Support\Str::limit($latestOwnerService->description ?? '', 140) }}</div>
+                                <input type="hidden" name="owner_service_id" value="{{ $latestOwnerService->id }}">
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <div class="mt-3 muted-small">No owner-added service has been added yet.</div>
-                @endif
-            </div>
+                    @else
+                        <div class="mt-3 muted-small">No owner-added service has been added yet.</div>
+                    @endif
+                </div>
 
                 <div class="assign-step">
                     <div class="step-header">
@@ -277,11 +272,8 @@
                 </div>
             </form>
         </div>
-    </div>
 
-    <aside class="details-right">
-        <!-- Facilities moved here from left column -->
-        <div class="card mb-3">
+        <div class="card mt-3">
             <h5>Facilities</h5>
             <div class="card-body p-0 mt-2">
                 <div class="p-3">
@@ -291,7 +283,6 @@
                                 <div class="fac-badge">{{ $facility->facility_name }}</div>
                             @endforeach
                         @else
-                            {{-- default facilities when owner hasn't added any --}}
                             @php
                                 $defaultFacilities = ['Hot Stone','Private Room','Shower','Changing Room','Tea/Refreshments'];
                             @endphp
@@ -304,14 +295,14 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card mt-3">
             <div class="d-flex justify-content-between align-items-start mb-3">
                 <div>
                     <div class="small text-muted">Base Price per Session</div>
                     @php
                         $displayPrice = $bath->final_price ?? $bath->price_per_session ?? 1100.00;
                         $displayMaxGuests = $bath->max_guests ?? 7;
-                            $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '02:03 PM';
+                        $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '02:03 PM';
                         $displayContact = $bath->owner->phone ?? '77755723';
                     @endphp
                     <div class="h4">Nu. {{ number_format((float) $displayPrice, 2) }}</div>
