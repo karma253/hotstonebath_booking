@@ -104,13 +104,7 @@
                 <div class="bath-title">{{ $bath->name }}</div>
                 <div class="owner-meta">{{ $bath->owner->name ?? 'Owner' }} · {{ optional($bath->dzongkhag)->name ?? '' }}</div>
             </div>
-            <div style="position:absolute; right:18px; top:18px; display:flex; gap:8px;">
-                <a href="{{ route('admin.baths.edit', $bath) }}" class="btn btn-sm btn-light" style="border-radius:8px;">Edit Bath</a>
-                <form action="{{ route('admin.baths.delete', $bath) }}" method="POST" onsubmit="return confirm('Delete this bath?')">
-                    @csrf
-                    <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;">Delete Bath</button>
-                </form>
-            </div>
+            
         </div>
 
         @if(!empty($bath->other_facilities))
@@ -326,7 +320,7 @@
                     @php
                         $displayPrice = $bath->final_price ?? $bath->price_per_session ?? 1100.00;
                         $displayMaxGuests = $bath->max_guests ?? 7;
-                        $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '01:13 PM';
+                        $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '01:54 PM';
                         $displayContact = $bath->owner->phone ?? '77755723';
                     @endphp
                     <div class="h4">Nu. {{ number_format((float) $displayPrice, 2) }}</div>
