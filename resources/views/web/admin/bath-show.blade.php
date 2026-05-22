@@ -104,6 +104,13 @@
                 <div class="bath-title">{{ $bath->name }}</div>
                 <div class="owner-meta">{{ $bath->owner->name ?? 'Owner' }} · {{ optional($bath->dzongkhag)->name ?? '' }}</div>
             </div>
+            <div style="position:absolute; right:18px; top:18px; display:flex; gap:8px;">
+                <a href="{{ route('admin.baths.edit', $bath) }}" class="btn btn-sm btn-light" style="border-radius:8px;">Edit Bath</a>
+                <form action="{{ route('admin.baths.delete', $bath) }}" method="POST" onsubmit="return confirm('Delete this bath?')">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;">Delete Bath</button>
+                </form>
+            </div>
         </div>
 
         @if(!empty($bath->other_facilities))
@@ -179,11 +186,19 @@
             <div class="card-body p-0 mt-2">
                 <div class="p-3">
                     <div class="fac-badges">
-                        @forelse ($bath->facilities as $facility)
-                            <div class="fac-badge">{{ $facility->facility_name }}</div>
-                        @empty
-                            <div class="text-muted">Facilities will be updated by the owner.</div>
-                        @endforelse
+                        @if($bath->facilities && $bath->facilities->isNotEmpty())
+                            @foreach($bath->facilities as $facility)
+                                <div class="fac-badge">{{ $facility->facility_name }}</div>
+                            @endforeach
+                        @else
+                            {{-- default facilities when owner hasn't added any --}}
+                            @php
+                                $defaultFacilities = ['Hot Stone','Private Room','Shower','Changing Room','Tea/Refreshments'];
+                            @endphp
+                            @foreach($defaultFacilities as $f)
+                                <div class="fac-badge">{{ $f }}</div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
