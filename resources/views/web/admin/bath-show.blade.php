@@ -138,46 +138,7 @@
             <p class="mt-2 small text-muted">Upload up to 10 images. Allowed formats: JPG, JPEG, PNG, WEBP.</p>
         </div>
 
-        <div class="card mt-3">
-            <h5>Owner-added Services</h5>
-            @php $servicesList = $services ?? $bath->services ?? collect(); @endphp
-            @if($servicesList->isEmpty())
-                <div class="text-muted py-4">No services added by the owner yet.</div>
-            @else
-                <div class="row g-3">
-                    @foreach($servicesList as $service)
-                        <div class="col-12">
-                            <div class="service-card d-flex justify-content-between align-items-start">
-                                <div class="d-flex gap-3 align-items-start flex-grow-1">
-                                    <div style="width:88px; height:72px; border-radius:10px; overflow:hidden; background:#f6f2ef; flex:0 0 auto;">
-                                        @if($service->image)
-                                            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->service_type }}" style="width:100%; height:100%; object-fit:cover; display:block;">
-                                        @else
-                                            <div class="d-flex align-items-center justify-content-center h-100 small text-muted">No image</div>
-                                        @endif
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">{{ $service->service_type }}</h6>
-                                        <div class="small text-muted">{{ Str::limit($service->description ?? '', 140) }}</div>
-                                        <div class="small text-muted mt-1">Owner: {{ $service->bath->owner->name ?? 'N/A' }}</div>
-                                        @if($service->bath && $service->bath->facilities && $service->bath->facilities->isNotEmpty())
-                                            <div class="mt-2 small text-muted">Facilities: {{ $service->bath->facilities->pluck('facility_name')->join(', ') }}</div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="text-end ms-3">
-                                    <div class="small text-muted">Nu. {{ number_format((float)$service->price,2) }}</div>
-                                    <div class="mt-2">
-                                        <a href="{{ route('admin.services.show', $service) }}" class="btn btn-sm btn-outline-primary">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
-        </div>
+        
 
         </div>
 
