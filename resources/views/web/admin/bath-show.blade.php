@@ -132,7 +132,6 @@
             <p class="mt-2 small text-muted">Upload up to 10 images. Allowed formats: JPG, JPEG, PNG, WEBP.</p>
         </div>
 
-        <div class="card mt-3">
     <aside class="details-right">
         <div class="card">
             <h5>Assign Inspection to Staff</h5>
