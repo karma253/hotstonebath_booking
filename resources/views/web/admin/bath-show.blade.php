@@ -168,6 +168,7 @@
         <div class="card mt-3">
             <h5>Assign Inspection to Staff</h5>
             @php
+                $servicesList = $servicesList ?? ($services ?? $bath->services ?? collect());
                 $latestOwnerService = $servicesList->first();
                 $latestOwnerServiceBath = $latestOwnerService?->bath ?? $latestOwnerBath ?? $bath;
                 $latestOwnerServiceImage = null;
