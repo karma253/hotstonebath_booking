@@ -172,6 +172,23 @@
 
         </div>
 
+        </div>
+
+        <div class="card mt-3">
+            <h5>Facilities</h5>
+            <div class="card-body p-0 mt-2">
+                <div class="p-3">
+                    <div class="fac-badges">
+                        @forelse ($bath->facilities as $facility)
+                            <div class="fac-badge">{{ $facility->facility_name }}</div>
+                        @empty
+                            <div class="text-muted">Facilities will be updated by the owner.</div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card mt-3">
             <h5>Assign Inspection to Staff</h5>
             @php
