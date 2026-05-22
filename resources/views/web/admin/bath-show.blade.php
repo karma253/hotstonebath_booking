@@ -64,6 +64,7 @@
     .fade-in { transition: opacity .25s ease, transform .18s ease; }
     .text-fade { opacity:0; transform:translateY(6px); }
     .btn-cancel { background:transparent; border:1px solid #eee; padding:10px 14px; border-radius:8px; }
+    .details-right{ display:flex; flex-direction:column; gap:14px; position:sticky; top:18px; }
 
     @media(max-width: 992px){ .page-grid{ grid-template-columns: 1fr; } .gallery-grid .main{ grid-column:auto; grid-row:auto; height:180px; } }
 </style>
@@ -195,9 +196,15 @@
                             @endphp
                             <label class="form-label small mb-1">Assign To Staff</label>
                             <select name="staff_id" class="form-select form-select-sm" required>
-                                <option value="">Select staff member</option>
+                                @if(optional($preferredStaff)->id)
+                                    <option value="{{ optional($preferredStaff)->id }}" selected>{{ optional($preferredStaff)->name }} ({{ optional($preferredStaff)->email }})</option>
+                                @else
+                                    <option value="">Select staff member</option>
+                                @endif
                                 @foreach(($staffMembers ?? collect()) as $staff)
-                                    <option value="{{ $staff->id }}" {{ optional($preferredStaff)->id == $staff->id ? 'selected' : '' }}>{{ $staff->name }}{{ !empty($staff->email) ? ' (' . $staff->email . ')' : '' }}</option>
+                                    @if(optional($preferredStaff)->id != $staff->id)
+                                        <option value="{{ $staff->id }}">{{ $staff->name }}{{ !empty($staff->email) ? ' (' . $staff->email . ')' : '' }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -214,7 +221,7 @@
                     <div class="mt-3 form-row">
                         <div class="form-col">
                             <label class="form-label small mb-1">Expected Date</label>
-                            <input type="date" name="expected_date" class="form-control form-control-sm">
+                            <input type="date" name="expected_date" placeholder="dd/mm/yyyy" class="form-control form-control-sm">
                         </div>
                         <div class="form-col">
                             <label class="form-label small mb-1">Expected Time</label>
