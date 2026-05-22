@@ -136,28 +136,7 @@
 
         </div>
 
-        <div class="card mt-3">
-            <h5>Facilities</h5>
-            <div class="card-body p-0 mt-2">
-                <div class="p-3">
-                    <div class="fac-badges">
-                        @if($bath->facilities && $bath->facilities->isNotEmpty())
-                            @foreach($bath->facilities as $facility)
-                                <div class="fac-badge">{{ $facility->facility_name }}</div>
-                            @endforeach
-                        @else
-                            {{-- default facilities when owner hasn't added any --}}
-                            @php
-                                $defaultFacilities = ['Hot Stone','Private Room','Shower','Changing Room','Tea/Refreshments'];
-                            @endphp
-                            @foreach($defaultFacilities as $f)
-                                <div class="fac-badge">{{ $f }}</div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="card mt-3">
             <h5>Assign Inspection to Staff</h5>
@@ -184,28 +163,7 @@
                         </div>
                     </div>
 
-                    @if($latestOwnerService || $latestOwnerServiceBath)
-                        @if($latestOwnerService)
-                            <input type="hidden" name="bath_service_id" value="{{ $latestOwnerService->id }}">
-                        @endif
-                        <input type="hidden" name="bath_id" value="{{ $latestOwnerServiceBath->id ?? '' }}">
-                        <div class="mt-3 small border rounded p-3 bg-light d-flex gap-3 align-items-start">
-                            <div style="width:88px; height:72px; border-radius:10px; overflow:hidden; background:#f6f2ef; flex:0 0 auto;">
-                                @if($latestOwnerServiceImage)
-                                    <img src="{{ asset('storage/' . ltrim($latestOwnerServiceImage, '/')) }}" alt="{{ $latestOwnerServiceBath->name ?? 'Owner listing' }}" style="width:100%; height:100%; object-fit:cover; display:block;">
-                                @else
-                                    <div class="d-flex align-items-center justify-content-center h-100 small text-muted">No image</div>
-                                @endif
-                            </div>
-                            <div class="flex-grow-1">
-                                <div class="fw-semibold">{{ $latestOwnerService->service_type ?? $latestOwnerServiceBath->name ?? 'Owner-added Service' }}</div>
-                                <div class="muted-small">Bath: {{ $latestOwnerServiceBath->name ?? 'N/A' }}</div>
-                                <div class="muted-small">Owner: {{ $latestOwnerServiceBath->owner->name ?? 'N/A' }}</div>
-                                @if($latestOwnerService && $latestOwnerService->price !== null)
-                                    <div class="muted-small">Price: Nu. {{ number_format((float) $latestOwnerService->price, 2) }}</div>
-                                @endif
-                                @if($latestOwnerServiceBath->facilities && $latestOwnerServiceBath->facilities->isNotEmpty())
-                                    <div class="muted-small">Facilities: {{ $latestOwnerServiceBath->facilities->pluck('facility_name')->join(', ') }}</div>
+        
                                 @endif
                             </div>
                         </div>
@@ -313,6 +271,30 @@
     </div>
 
     <aside class="details-right">
+        <!-- Facilities moved here from left column -->
+        <div class="card mb-3">
+            <h5>Facilities</h5>
+            <div class="card-body p-0 mt-2">
+                <div class="p-3">
+                    <div class="fac-badges">
+                        @if($bath->facilities && $bath->facilities->isNotEmpty())
+                            @foreach($bath->facilities as $facility)
+                                <div class="fac-badge">{{ $facility->facility_name }}</div>
+                            @endforeach
+                        @else
+                            {{-- default facilities when owner hasn't added any --}}
+                            @php
+                                $defaultFacilities = ['Hot Stone','Private Room','Shower','Changing Room','Tea/Refreshments'];
+                            @endphp
+                            @foreach($defaultFacilities as $f)
+                                <div class="fac-badge">{{ $f }}</div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card">
             <div class="d-flex justify-content-between align-items-start mb-3">
                 <div>
@@ -320,7 +302,7 @@
                     @php
                         $displayPrice = $bath->final_price ?? $bath->price_per_session ?? 1100.00;
                         $displayMaxGuests = $bath->max_guests ?? 7;
-                        $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '01:54 PM';
+                            $displayOpening = optional($bath->opening_time) ? \Carbon\Carbon::parse($bath->opening_time)->format('h:i A') : '02:03 PM';
                         $displayContact = $bath->owner->phone ?? '77755723';
                     @endphp
                     <div class="h4">Nu. {{ number_format((float) $displayPrice, 2) }}</div>
