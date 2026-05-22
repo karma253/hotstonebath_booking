@@ -164,10 +164,6 @@
                     </div>
 
         
-                    </div>
-                    </div>
-                </div>
-
                 @if($latestOwnerService)
                     <div id="service-overview" class="mt-3 service-card d-flex gap-3 align-items-start">
                         @if($latestOwnerServiceImage)
