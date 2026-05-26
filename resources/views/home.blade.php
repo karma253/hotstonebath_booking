@@ -172,6 +172,28 @@
     </section>
 
     <!-- Floating search card (overlaps hero) -->
+    <!-- Browse Services By Category Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2>Browse Services By Category</h2>
+            <p class="section-subtitle">Discover authentic Bhutanese wellness experiences</p>
+            <div class="services-grid">
+                <a href="{{ route('services.by.category', 'hot-stone-bath') }}" class="service-card">
+                    <div class="service-icon">🛁</div>
+                    <h3>Hot Stone Bath</h3>
+                    <p>Traditional hot stone therapy for relaxation and healing</p>
+                </a>
+
+                <a href="{{ route('services.by.category', 'medicinal-water') }}" class="service-card">
+                    <div class="service-icon">💧</div>
+                    <h3>Medicinal Water</h3>
+                    <p>Therapeutic mineral-rich water baths for wellness</p>
+                </a>
+
+                <!-- Limited categories: Hot Stone Bath and Medicinal Water -->
+            </div>
+        </div>
+    </section>
 
     <!-- Benefit strip (trusted, authentic, easy booking, support) -->
     <div class="container">
@@ -243,71 +265,7 @@
             </div>
     </div>
 
-    <!-- Browse Services By Category Section -->
-    <section class="services-section">
-        <div class="container">
-            <h2>Browse Services By Category</h2>
-            <p class="section-subtitle">Discover authentic Bhutanese wellness experiences</p>
-            <div class="services-grid">
-                <a href="{{ route('services.by.category', 'hot-stone-bath') }}" class="service-card">
-                    <div class="service-icon">🛁</div>
-                    <h3>Hot Stone Bath</h3>
-                    <p>Traditional hot stone therapy for relaxation and healing</p>
-                </a>
-
-                <a href="{{ route('services.by.category', 'medicinal-water') }}" class="service-card">
-                    <div class="service-icon">💧</div>
-                    <h3>Medicinal Water</h3>
-                    <p>Therapeutic mineral-rich water baths for wellness</p>
-                </a>
-
-                <!-- Limited categories: Hot Stone Bath and Medicinal Water -->
-            </div>
-        </div>
-    </section>
-
-    <section class="about-us">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>This system will make it easy for guests to discover and book authentic Bhutanese wellness experiences. You can browse trusted bath facilities, see available dates, read reviews, and book a menchu service in just a few clicks. Once you find a bath you like, check the calendar, select your preferred time, and pay securely. The bath owner will confirm your booking and send you the details. After your visit, you can share your review to help other guests. This system connects you with verified bath owners who offer genuine traditional wellness treatments.</p>
-        </div>
-    </section>
-
-    <div class="container">
-        <section id="features" class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🏘️</div>
-                <h3>Provider Management</h3>
-                <p>Owners can register baths, manage services, upload images, and control availability</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Guest Booking</h3>
-                <p>Guests search for baths, check real-time availability, and book with multiple payment options</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔐</div>
-                <h3>Admin Verification</h3>
-                <p>Admins verify providers, review documents, and manage platform integrity</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⭐</div>
-                <h3>Reviews & Ratings</h3>
-                <p>Guests can rate and review completed bookings to build trust in the platform</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Analytics</h3>
-                <p>Providers get detailed reports on bookings, revenue, and customer insights</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3>Multi-Region</h3>
-                <p>Coverage across Thimphu with detailed area mapping and localized content</p>
-            </div>
-        </section>
-
-    </div>
+    
 
     <section class="gallery">
         <div class="container">
@@ -400,7 +358,51 @@
         </div>
     </div>
 
-    <footer>
+        <!-- About Us and Features moved to bottom per request -->
+        <section class="about-us">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>This system will make it easy for guests to discover and book authentic Bhutanese wellness experiences. You can browse trusted bath facilities, see available dates, read reviews, and book a menchu service in just a few clicks. Once you find a bath you like, check the calendar, select your preferred time, and pay securely. The bath owner will confirm your booking and send you the details. After your visit, you can share your review to help other guests. This system connects you with verified bath owners who offer genuine traditional wellness treatments.</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="features" class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🏘️</div>
+                    <h3>Provider Management</h3>
+                    <p>Owners can register baths, manage services, upload images, and control availability</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Guest Booking</h3>
+                    <p>Guests search for baths, check real-time availability, and book with multiple payment options</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Admin Verification</h3>
+                    <p>Admins verify providers, review documents, and manage platform integrity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Reviews & Ratings</h3>
+                    <p>Guests can rate and review completed bookings to build trust in the platform</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics</h3>
+                    <p>Providers get detailed reports on bookings, revenue, and customer insights</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Region</h3>
+                    <p>Coverage across Thimphu with detailed area mapping and localized content</p>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
         <div class="container">
             <div style="display:flex;gap:2rem;justify-content:space-between;flex-wrap:wrap;padding:2rem 0;">
                 
