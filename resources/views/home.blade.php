@@ -106,14 +106,6 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="brand">
-                    <div class="mark">🪷</div>
-                    <div>
-                        <div style="font-size:14px;opacity:0.95">Druk Wellness</div>
-                        <div style="font-size:11px;opacity:0.85;margin-top:2px">Booking System</div>
-                    </div>
-                </div>
-
                 <nav class="main-nav">
                     <a href="{{ route('home') }}" class="active">Home</a>
                     <a href="{{ route('services.index') }}">Services</a>
@@ -122,11 +114,7 @@
                     <a href="{{ route('about') }}">About Us</a>
                     <a href="{{ route('contact') }}">Contact Us</a>
                 </nav>
-
-                <div class="nav-actions">
-                    <a href="{{ route('login') }}" class="nav-btn">Login</a>
-                    <a href="{{ route('register') }}" class="nav-btn primary">Sign Up</a>
-                </div>
+                
             </div>
         </div>
     </header>
@@ -389,6 +377,8 @@
                         <li><a href="{{ route('services.index') }}">Services</a></li>
                         <li><a href="{{ route('about') }}">About</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Sign Up</a></li>
                         <li><a href="/owner/login">Owner Login</a></li>
                         <li><a href="/owner/register">Owner Register</a></li>
                         <li><a href="/bookings">My Bookings</a></li>
