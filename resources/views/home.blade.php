@@ -28,6 +28,8 @@
                 .container{max-width:1200px;margin:0 auto;padding:0 20px}
                 .header-content{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
                 .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+                .brand img{height:36px}
+                .brand div{color:#fff}
                 .brand .mark{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
                 nav{display:flex;gap:20px;align-items:center}
                 .main-nav{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:22px}
@@ -126,6 +128,14 @@
     <header>
         <div class="container">
             <div class="header-content">
+                <div class="brand">
+                    <img src="/image/logo.png" alt="logo" style="height:36px;border-radius:6px;margin-right:10px">
+                    <div style="line-height:1">
+                        <div style="font-size:13px;font-weight:700;opacity:0.95">Druk Wellness</div>
+                        <div style="font-size:11px;opacity:0.85;margin-top:1px">Booking System</div>
+                    </div>
+                </div>
+
                 <nav class="main-nav">
                     <a href="{{ route('home') }}" class="active">Home</a>
                     <a href="{{ route('services.index') }}">Services</a>
@@ -134,7 +144,11 @@
                     <a href="{{ route('about') }}">About Us</a>
                     <a href="{{ route('contact') }}">Contact Us</a>
                 </nav>
-                
+
+                <div class="nav-actions">
+                    <a href="{{ route('login') }}" class="nav-btn">Login</a>
+                    <a href="{{ route('register') }}" class="nav-btn primary">Sign Up</a>
+                </div>
             </div>
         </div>
     </header>
