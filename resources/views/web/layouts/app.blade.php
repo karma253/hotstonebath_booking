@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Hot Stone Bath Booking')</title>
+    <title>@yield('title', 'Druk Wellness Booking')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -12,17 +12,17 @@
         }
         .hero-bg {
             background:
-                radial-gradient(circle at 15% 20%, rgba(240, 196, 108, 0.16), transparent 35%),
-                radial-gradient(circle at 85% 35%, rgba(32, 88, 63, 0.2), transparent 35%),
-                linear-gradient(120deg, #8d1f1f 0%, #c6362c 55%, #d98b2b 100%);
+                radial-gradient(circle at 15% 20%, rgba(94, 163, 255, 0.18), transparent 35%),
+                radial-gradient(circle at 85% 35%, rgba(23, 61, 121, 0.24), transparent 35%),
+                linear-gradient(120deg, #07101f 0%, #0a2340 52%, #123869 100%);
             color: #fff;
-            border: 2px solid rgba(240, 196, 108, 0.35);
+            border: 2px solid rgba(128, 184, 255, 0.35);
             position: relative;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             box-shadow: 
-                0 10px 30px rgba(139, 31, 31, 0.25),
+                0 10px 30px rgba(4, 12, 28, 0.45),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
@@ -42,13 +42,13 @@
         .hero-bg:hover {
             transform: translateY(-8px);
             box-shadow: 
-                0 20px 50px rgba(139, 31, 31, 0.35),
+                0 20px 50px rgba(6, 16, 36, 0.55),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             background:
-                radial-gradient(circle at 15% 20%, rgba(240, 196, 108, 0.22), transparent 35%),
-                radial-gradient(circle at 85% 35%, rgba(32, 88, 63, 0.3), transparent 35%),
-                linear-gradient(120deg, #9d2f2f 0%, #d64639 55%, #e39a3b 100%);
-            border-color: rgba(240, 196, 108, 0.55);
+                radial-gradient(circle at 15% 20%, rgba(126, 189, 255, 0.22), transparent 35%),
+                radial-gradient(circle at 85% 35%, rgba(30, 76, 148, 0.3), transparent 35%),
+                linear-gradient(120deg, #0a1a33 0%, #11315a 55%, #1a4a84 100%);
+            border-color: rgba(150, 198, 255, 0.55);
         }
 
         .hero-bg:hover::before {
@@ -258,16 +258,114 @@
         .hero-soft-link:hover::after {
             width: 100%;
         }
+
+        .site-navbar {
+            background: linear-gradient(135deg, #5a3412 0%, #3f210e 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Keep navbar compact while allowing a larger logo */
+        .site-navbar { padding-top: 8px; padding-bottom: 8px; }
+        .navbar-brand .brand-logo {
+            height: 96px;
+            width: auto;
+            border-radius: 6px;
+            margin-top: -18px; /* let logo overlap without increasing navbar height */
+            display: block;
+        }
+        @media (max-width: 767px) {
+            .navbar-brand .brand-logo { height: 56px; margin-top: 0; }
+        }
+
+        .site-navbar .nav-link,
+        .site-navbar .navbar-brand {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .site-navbar .nav-link:hover,
+        .site-navbar .nav-link:focus,
+        .site-navbar .navbar-brand:hover,
+        .site-navbar .navbar-brand:focus {
+            color: #ffffff;
+        }
+
+        .btn,
+        .btn-light,
+        .btn-outline-light,
+        .btn-primary,
+        .btn-outline-primary,
+        .btn-hero-primary,
+        .btn-hero-secondary,
+        .view-btn,
+        .card-btn,
+        .card-btn.solid,
+        .card-shadow .btn {
+            background-color: #8B4513;
+            border-color: #8B4513;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn:hover,
+        .btn:focus,
+        .btn-light:hover,
+        .btn-light:focus,
+        .btn-outline-light:hover,
+        .btn-outline-light:focus,
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-outline-primary:hover,
+        .btn-outline-primary:focus,
+        .btn-hero-primary:hover,
+        .btn-hero-secondary:hover,
+        .view-btn:hover,
+        .card-btn.solid:hover,
+        .card-shadow .btn:hover {
+            background-color: #6a3510;
+            border-color: #6a3510;
+            color: #ffffff;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+            transform: translateY(-2px);
+        }
+
+        .btn:active,
+        .btn-light:active,
+        .btn-outline-light:active,
+        .btn-primary:active,
+        .btn-outline-primary:active {
+            background-color: #0a2342;
+            border-color: #0a2342;
+            color: #ffffff;
+        }
+        /* Navbar link hover & active behavior */
+        .site-navbar .nav-link {
+            transition: color 180ms ease, transform 120ms ease, text-shadow 180ms ease;
+            position: relative;
+        }
+        .site-navbar .nav-link:hover,
+        .site-navbar .nav-link:focus {
+            color: #fff;
+            transform: translateY(-3px);
+            text-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+        .site-navbar .nav-link.active,
+        .site-navbar .nav-link:active {
+            color: #fffbe6;
+            border-bottom: 3px solid rgba(255,255,255,0.18);
+            padding-bottom: 6px;
+            transform: translateY(-4px);
+        }
     </style>
     @stack('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}">
-            <img src="/image/system-logo.png" alt="Hot Stone Bath Logo" style="height: 45px; width: auto;">
-            <span>Hot Stone Bath Booking System</span>
+<nav class="navbar navbar-expand-lg navbar-dark site-navbar">
+    <div class="container-fluid px-3">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ route('home') }}" style="position:relative; left:0; top:0;">
+            <img src="/image/logo.png" alt="Druk Wellness Logo" class="brand-logo">
+            <span>Druk Wellness Booking System</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
@@ -275,41 +373,111 @@
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav mx-auto gap-lg-2">
                 <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('how.to.book') }}">How to Book</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('services.index') }}">Services</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('wellness.baths') }}">Wellness Baths</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('how.to.book') }}">How It Works</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('about.us') }}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('contact.us') }}">Contact Us</a></li>
             </ul>
             <div class="d-flex gap-2 ms-lg-3 align-items-center">
-                @auth
-                    @if(Auth::user()->role === 'admin')
-                        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
-                        <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
-                        </form>
-                    @elseif(Auth::user()->role === 'owner')
-                        <a href="{{ route('owner.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
-                        <form action="{{ route('owner.logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('guest.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
-                        <form action="{{ route('guest.logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
-                        </form>
+                {{-- Check if on login/registration pages --}}
+                @php
+                    $loginRoutes = ['login', 'owner.login', 'guest.login', 'admin.login', 'guest.register'];
+                    $isLoginPage = in_array(Route::currentRouteName(), $loginRoutes);
+                @endphp
+                
+                    @if($isLoginPage)
+                    <!-- Login/Register pages: Show Login/Signup only -->
+                    @if(Route::currentRouteName() !== 'guest.register')
+                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm px-3">Login</a>
                     @endif
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Signup</button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ route('guest.register') }}">Sign up as Guest</a></li>
+                            <li><a class="dropdown-item" href="{{ route('owner.register') }}">Sign up as Owner</a></li>
+                        </ul>
+                    </div>
+                    @elseif(Route::currentRouteName() === 'home')
+                    <!-- Home page: Show Login/Signup only -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">Login</button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('guest.login') }}">Customer Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('owner.login') }}">Owner Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.login') }}">Admin Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('staff.login') }}">Staff Login</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group ms-2">
+                            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">Signup</button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('guest.register') }}">Sign up as Guest</a></li>
+                                <li><a class="dropdown-item" href="{{ route('owner.register') }}">Sign up as Owner</a></li>
+                            </ul>
+                        </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm px-3">Login</a>
-                    <a href="{{ route('guest.register') }}" class="btn btn-light btn-sm px-3">Signup</a>
-                @endauth
+                    <!-- Other pages: Show Dashboard/Logout for authenticated users -->
+                    @auth
+                        @if(Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
+                            <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
+                            </form>
+                        @elseif(Auth::user()->role === 'owner')
+                            <a href="{{ route('owner.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
+                            <form action="{{ route('owner.logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
+                            </form>
+                        @else
+                            <a href="{{ route('guest.dashboard') }}" class="btn btn-outline-light btn-sm px-3">Dashboard</a>
+                            <form action="{{ route('guest.logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-light btn-sm px-3">Logout</button>
+                            </form>
+                        @endif
+                    @else
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">Login</button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('guest.login') }}">Customer Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('owner.login') }}">Owner Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.login') }}">Admin Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('staff.login') }}">Staff Login</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group ms-2">
+                            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">Signup</button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{{ route('guest.register') }}">Sign up as Guest</a></li>
+                                <li><a class="dropdown-item" href="{{ route('owner.register') }}">Sign up as Owner</a></li>
+                            </ul>
+                        </div>
+                    @endauth
+                @endif
             </div>
         </div>
     </div>
 </nav>
 
+<!-- Footer (minimal) -->
+<footer class="mt-5" style="background:#f7efe8;padding:1rem 0;border-top:1px solid rgba(0,0,0,0.04);">
+    <div class="container text-center" style="padding:0.5rem 0;">
+        <!-- Footer content removed per user request -->
+    </div>
+</footer>
+
 <main class="py-4">
     <div class="container">
+        @if (session('session_expired'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><i class="fas fa-clock me-2"></i>Session Expired!</strong>
+                {{ session('session_expired') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -332,5 +500,29 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
+<script>
+    // Toggle "active" class on nav link clicks and try to mark current path on load
+    document.addEventListener('DOMContentLoaded', function () {
+        var links = document.querySelectorAll('.site-navbar .nav-link');
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                links.forEach(function (l) { l.classList.remove('active'); });
+                this.classList.add('active');
+            });
+        });
+
+        // Mark link matching current pathname as active (basic matching)
+        var path = location.pathname.replace(/\/$/, '');
+        links.forEach(function (link) {
+            try {
+                var href = link.getAttribute('href') || '';
+                var linkPath = href.replace(location.origin, '').replace(/\/$/, '');
+                if (linkPath === path || href === path) {
+                    link.classList.add('active');
+                }
+            } catch (e) { /* ignore malformed hrefs */ }
+        });
+    });
+</script>
 </body>
 </html>
