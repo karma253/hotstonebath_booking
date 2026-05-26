@@ -9,543 +9,143 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-                <div class="gallery-card">
-                    <picture>
-                        <source type="image/webp" srcset="/image/optimized/hot%20stone%20bath-1200.webp 1200w, /image/optimized/hot%20stone%20bath-800.webp 800w" sizes="(max-width:900px) 100vw, 50vw">
-                        <img src="/image/hot stone bath.png" alt="Hot Stone Bath" class="gallery-card-img" loading="lazy" decoding="async" width="560" height="320">
-                    </picture>
-                    <div class="gallery-card-content">
-                        <div>
-                            <div class="gallery-card-title">Hot Stone Bath</div>
-                            <div class="gallery-card-location">Thimphu, Dechencholing</div>
-                            <div class="gallery-card-description">Relax your body and mind with natural hot stones.</div>
-                        </div>
-                        <div>
-                            <div class="gallery-card-details">
-                                <div class="gallery-card-price">Nu. 1,100</div>
-                                <div class="gallery-card-capacity">1 Guest</div>
-                            </div>
-                            <div style="margin-top:10px">
-                                <a href="{{ route('services.show', ['service' => 1]) }}" class="gallery-card-btn">View Details ➜</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            .gallery-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .gallery-card {
-                display:flex;
-                background:#fff;
-                border-radius:12px;
-                overflow:hidden;
-                box-shadow:0 10px 24px rgba(0,0,0,0.12);
-                transition:transform 0.3s,box-shadow 0.3s;
-            }
-
-            .gallery-card-img{width:48%;height:220px;object-fit:cover;display:block}
-
-            .gallery-card-content{padding:18px 22px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
-
-            .gallery-card-title{font-size:1.28rem;color:#3b2412;font-weight:700;margin-bottom:6px}
-            .gallery-card-location{color:#7a5a49;font-size:0.95rem;margin-bottom:8px}
-            .gallery-card-description{color:#6b4a3a;font-size:0.95rem}
-
-            .gallery-card-details{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #f1e9e6;margin-top:12px}
-            .gallery-card-price{font-size:1.15rem;color:#3b2412;font-weight:800;background:#fff6f0;padding:6px 10px;border-radius:10px;border:1px solid rgba(0,0,0,0.04)}
-            .gallery-card-btn{background:#8f4724;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;display:inline-block}
-
-            .gallery-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.14)}
-
-            @media (max-width: 900px){
-                .gallery-grid{grid-template-columns:1fr}
-                .gallery-card{flex-direction:column}
-                .gallery-card-img{width:100%;height:220px}
-            }
-        }
-        .nav-btn.primary{background:#b65b2b;border:none}
-
-        .btn-secondary:hover {
-            background: #f8f8f8;
-            color: #222;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-        }
-
-        .btn-secondary:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-
-        .hero {
-            /* background handled by <picture> for responsive/webp support */
-            background: transparent;
-            color: #fff;
-            padding: 5.5rem 0 2.8rem 0;
-            text-align: left;
-            margin-bottom: 2.5rem;
-            position: relative;
-            min-height: 420px;
-            display:flex;align-items:center;overflow:hidden
-        }
-
-        .hero .hero-bg{position:absolute;left:0;top:0;right:0;bottom:0;z-index:0}
-        .hero .hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, rgba(43,34,26,0.75) 0%, rgba(43,34,26,0.25) 55%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-        }
-
-        .hero .hero-inner {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 3.2rem;
-            margin-bottom: 0.75rem;
-            color: #fff;
-            line-height:1.02;
-            letter-spacing: -0.5px;
-            font-weight:700;
-            text-shadow:0 6px 18px rgba(0,0,0,0.35)
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            margin-bottom: 1.25rem;
-            color: #5a5a5a;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .btn-hero{
-            padding:12px 22px;border-radius:8px;background:linear-gradient(180deg,#b65b2b,#8f4724);color:#fff;text-decoration:none;font-weight:700;border:0;box-shadow:0 8px 30px rgba(142,66,34,0.18)
-        }
-        .btn-ghost{padding:10px 18px;border-radius:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.12)}
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-        }
-
-        .feature-card:active {
-            transform: translateY(-2px) scale(0.98);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            color: #e74c3c;
-            margin-bottom: 1rem;
-        }
-
-        .stats {
-            background: #f8f9fa;
-            padding: 3rem 0;
-            margin: 3rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .stat {
-            padding: 1.5rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: #666;
-            margin-top: 0.5rem;
-        }
-
-        .documentation {
-            background: white;
-            padding: 3rem 0;
-        }
-
-        .doc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .doc-item {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #e74c3c;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .doc-item:hover {
-            background: white;
-            transform: translateX(8px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-left: 6px solid #e74c3c;
-        }
-
-        .doc-item:active {
-            transform: translateX(4px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .doc-item h4 {
-            color: #e74c3c;
-            margin-bottom: 0.5rem;
-        }
-
-        .doc-item p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .doc-item a {
-            color: #e74c3c;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .doc-item a:hover {
-            text-decoration: underline;
-            transform: translateX(4px);
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav a {
-                margin-left: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn-large {
-                width: 100%;
-            }
-        }
-
-        .api-status {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .gallery {
-            padding: 3rem 0;
-            margin: 3rem 0;
-        }
-
-        .gallery h2 {
-            text-align: center;
-            font-size: 2rem;
-            color: #3b2412;
-            margin-bottom: 2rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .gallery-card {
-            display:flex;
-            background:#fff;
-            border-radius:12px;
-            overflow:hidden;
-            box-shadow:0 10px 24px rgba(0,0,0,0.12);
-            transition:transform 0.3s,box-shadow 0.3s;
-        }
-
-        .gallery-card-img{width:48%;height:220px;object-fit:cover;display:block}
-
-        .gallery-card-content{padding:18px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
-
-        .gallery-card-title{font-size:1.3rem;color:#3b2412;font-weight:700;margin-bottom:6px}
-        .gallery-card-location{color:#7a5a49;font-size:0.95rem;margin-bottom:8px}
-        .gallery-card-description{color:#6b4a3a;font-size:0.95rem}
-
-        .gallery-card-details{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #f1e9e6;margin-top:12px}
-        .gallery-card-price{font-size:1.2rem;color:#b65b2b;font-weight:700}
-        .gallery-card-btn{background:#b65b2b;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;display:inline-block}
-
-        .gallery-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.14)}
-
-        @media (max-width: 900px){
-            .gallery-grid{grid-template-columns:1fr}
-            .gallery-card{flex-direction:column}
-            .gallery-card-img{width:100%;height:220px}
-        }
-
-        .about-us {
-            background: #f8f9fa;
-            padding: 3rem 0;
-            margin: 3rem 0;
-        }
-
-        .about-us h2 {
-            color: #e74c3c;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .about-us p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            text-align: justify;
-        }
-
-        .services-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 4rem 0;
-            margin: 2rem 0;
-        }
-
-        .services-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #e74c3c;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 3rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-            border-color: #e74c3c;
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            color: #e74c3c;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .service-card p {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        /* Search card overlapping hero */
-        .search-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 30px 60px rgba(27,18,12,0.12);max-width:1100px;margin:-70px auto 28px;display:flex;gap:12px;align-items:center;border:1px solid rgba(0,0,0,0.04)}
-        .search-card .field{flex:1}
-        .search-card label{display:block;font-size:12px;color:#777;margin-bottom:6px}
-        .search-card select,.search-card input{width:100%;padding:12px;border-radius:10px;border:1px solid #eee}
-
-        /* Feature strip */
-        .benefit-strip{background:linear-gradient(180deg,#fff8f3,#fbf6f2);border-radius:14px;padding:16px 20px;display:flex;gap:18px;justify-content:space-between;align-items:center;margin:18px auto;max-width:1100px;border:1px solid rgba(0,0,0,0.03)}
-
-        /* Popular cards tweaks */
-        .gallery-card{display:flex;gap:18px;padding:18px}
-        .gallery-card-img{width:42%;height:140px;object-fit:cover}
-
-        /* Footer darker */
-        footer{background:#2b160f;color:#f3e9e3}
-        footer a{color:#f8e9df}
-    </style>
-</head>
-<body>
+                :root{
+                    --brown-900:#2b160f;
+                    --brown-700:#8f4724;
+                    --brown-600:#b65b2b;
+                    --cream:#fbf6f2;
+                    --panel:#ffffff;
+                    --muted:#7a5a49;
+                    --gold:#d9a05a;
+                }
+
+                *{margin:0;padding:0;box-sizing:border-box}
+                body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial;line-height:1.6;color:var(--brown-900);background:var(--cream)}
+
+                /* Header */
+                header{background:linear-gradient(180deg,var(--brown-900),rgba(43,21,15,0.95));color:#fff;padding:12px 0;position:sticky;top:0;z-index:100;backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.03)}
+                .container{max-width:1200px;margin:0 auto;padding:0 20px}
+                .header-content{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
+                .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+                .brand .mark{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+                nav{display:flex;gap:20px;align-items:center}
+                .main-nav{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:22px}
+                .main-nav a{color:rgba(255,255,255,0.92);padding:8px 10px;font-weight:600;position:relative}
+                .main-nav a.active::after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;height:3px;width:48%;background:var(--gold);border-radius:3px}
+                nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 6px;position:relative}
+                nav a:hover{opacity:0.95}
+                nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:3px;background:var(--gold);border-radius:2px;width:60%;margin:0 auto}
+                .nav-actions a{margin-left:10px}
+                .nav-btn{padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#fff;text-decoration:none}
+                .nav-btn.primary{background:linear-gradient(180deg,var(--brown-600),var(--brown-700));border:none}
+
+                /* Hero */
+                .hero{position:relative;min-height:460px;display:flex;align-items:center;padding:5.5rem 0 2.8rem;overflow:hidden}
+                .hero .hero-bg{position:absolute;inset:0;z-index:0}
+                .hero .hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+                .hero .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(43,21,15,0.72) 0%,rgba(43,21,15,0.4) 50%,rgba(0,0,0,0.02) 100%);z-index:1}
+                .hero .hero-inner{position:relative;z-index:2;max-width:700px;padding-left:28px}
+                .hero .subtitle{font-size:13px;letter-spacing:2.4px;color:var(--gold);font-weight:700;margin-bottom:14px;text-transform:uppercase}
+                .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:3.8rem;color:#fff;line-height:1.02;margin:0 0 14px;text-shadow:0 8px 26px rgba(0,0,0,0.45);font-weight:700}
+                .hero p{max-width:640px;color:rgba(255,255,255,0.95);margin-bottom:18px;font-size:1.05rem}
+                .cta-buttons{display:flex;gap:12px}
+                .btn-hero{padding:12px 22px;border-radius:8px;background:linear-gradient(180deg,var(--brown-600),var(--brown-700));color:#fff;text-decoration:none;font-weight:700;border:0;box-shadow:0 8px 30px rgba(142,66,34,0.18)}
+                .btn-ghost{padding:10px 18px;border-radius:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.12)}
+
+                /* Search card */
+                .search-card{background:var(--panel);border-radius:14px;padding:18px 20px;box-shadow:0 36px 80px rgba(27,18,12,0.18);max-width:1100px;margin:-86px auto 28px;display:flex;gap:14px;align-items:center;border:1px solid rgba(0,0,0,0.06);position:relative;z-index:60}
+                .search-card .field{flex:1}
+                .search-card label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+                .search-card select,.search-card input{width:100%;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff}
+                .search-card .search-btn{background:linear-gradient(180deg,var(--brown-600),var(--brown-700));color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700}
+
+                /* Feature strip */
+                .benefit-strip{background:linear-gradient(180deg,#fff8f3,#fbf6f2);border-radius:14px;padding:14px;display:flex;gap:18px;justify-content:space-between;align-items:center;margin:18px auto;max-width:1100px;border:1px solid rgba(0,0,0,0.03)}
+                .benefit-item{display:flex;gap:12px;align-items:center}
+                .benefit-item .icon{width:48px;height:48px;border-radius:10px;background:#fff6f0;display:flex;align-items:center;justify-content:center}
+
+                /* Popular cards */
+                .gallery{padding:3rem 0;margin:3rem 0}
+                .gallery h2{text-align:center;font-size:1.9rem;color:var(--brown-900);margin-bottom:12px}
+                .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-bottom:2rem}
+                .gallery-card{display:flex;background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,0.14);transition:transform 0.28s}
+                .gallery-card-img{width:44%;height:220px;object-fit:cover;display:block;border-top-left-radius:12px;border-bottom-left-radius:12px}
+                .gallery-card-content{padding:20px 26px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+                .gallery-card-title{font-size:1.28rem;color:var(--brown-900);font-weight:800;margin-bottom:6px}
+                .gallery-card-location{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
+                .gallery-card-description{color:#6b4a3a;font-size:0.95rem}
+                .gallery-card-details{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #f1e9e6;margin-top:12px}
+                .gallery-card-price{font-size:1.15rem;color:var(--brown-900);font-weight:800;background:#fff6f0;padding:6px 10px;border-radius:10px;border:1px solid rgba(0,0,0,0.04)}
+                .gallery-card-btn{background:linear-gradient(180deg,var(--brown-700),var(--brown-600));color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+
+                /* Bottom highlight */
+                .highlight-bar{max-width:1100px;margin:30px auto;padding:20px;border-radius:14px;background:linear-gradient(90deg,var(--brown-900),var(--brown-700));color:#fff;box-shadow:0 18px 48px rgba(0,0,0,0.18)}
+                .highlight-grid{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+                .highlight-item{display:flex;gap:12px;align-items:center;min-width:160px}
+                .highlight-item .icon{width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center}
+
+                /* Footer */
+                footer{background:var(--brown-900);color:#f0e6e1;padding:36px 0;margin-top:32px}
+                footer a{color:#f8e9df}
+
+                /* Responsive */
+                @media(max-width:900px){
+                    .gallery-grid{grid-template-columns:1fr}
+                    .gallery-card{flex-direction:column}
+                    .gallery-card-img{width:100%;height:220px}
+                    .benefit-strip{flex-direction:column;gap:12px}
+                    .highlight-grid{flex-direction:column;align-items:stretch}
+                    nav{overflow:auto}
+                }
+            </style>
+
+    <body>
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="brand">
                     <div class="mark">🪷</div>
                     <div>
-                        <div style="font-size:14px;opacity:0.9">Druk Wellness</div>
-                        <div style="font-size:11px;opacity:0.8;margin-top:2px">Booking System</div>
+                        <div style="font-size:14px;opacity:0.95">Druk Wellness</div>
+                        <div style="font-size:11px;opacity:0.85;margin-top:2px">Booking System</div>
                     </div>
                 </div>
 
-                <nav>
-                    <a href="#">Home</a>
-                    <a href="#features">Services</a>
-                    <a href="{{ route('services.index') }}">Wellness Baths</a>
-                    <a href="{{ route('about') }}">How It Works</a>
+                <nav class="main-nav">
+                    <a href="{{ route('home') }}" class="active">Home</a>
+                    <a href="{{ route('services.index') }}">Services</a>
+                    <a href="#">Wellness Baths</a>
+                    <a href="{{ route('howitworks') }}">How It Works</a>
                     <a href="{{ route('about') }}">About Us</a>
                     <a href="{{ route('contact') }}">Contact Us</a>
                 </nav>
 
                 <div class="nav-actions">
-                    <a href="/login" class="nav-btn">Login</a>
-                    <a href="/register" class="nav-btn primary">Sign Up</a>
+                    <a href="{{ route('login') }}" class="nav-btn">Login</a>
+                    <a href="{{ route('register') }}" class="nav-btn primary">Sign Up</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="hero">
+    <section class="hero">
         <picture class="hero-bg">
             <source type="image/webp" srcset="/image/optimized/Six%20Senses%20Thimphu-1600.webp 1600w, /image/optimized/Six%20Senses%20Thimphu-1200.webp 1200w, /image/optimized/Six%20Senses%20Thimphu-800.webp 800w" sizes="100vw">
-            <img src="/image/Six Senses Thimphu.jpg" alt="Druk Wellness hero" loading="eager" decoding="sync">
+            <img src="/image/Six Senses Thimphu.jpg" alt="Bhutan wellness" loading="lazy" decoding="async">
         </picture>
-        <div class="container">
-            <div class="hero-inner">
-                <h1>Relax. Rejuvenate.<br>Restore Your Balance.</h1>
-                <p style="max-width:640px;margin-top:12px;color:rgba(255,255,255,0.9)">Discover authentic hot stone baths and wellness services across Bhutan. Easy booking, clear pricing, and trusted wellness experiences.</p>
-                <div style="margin-top:18px" class="cta-buttons">
-                    <a href="{{ route('services.index') }}" class="btn-hero">Explore Services ➜</a>
-                    <a href="{{ route('about') }}" class="btn-ghost">How It Works</a>
-                </div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-inner">
+            <div class="subtitle">AUTHENTIC BHUTANESE WELLNESS</div>
+            <h1>Relax. Rejuvenate. Restore Your Balance.</h1>
+            <p>Discover authentic hot stone baths and wellness services across Bhutan. Easy booking, clear pricing, and trusted wellness experiences.</p>
+            <div class="cta-buttons">
+               <a href="{{ route('services.index') }}" class="btn-hero">Explore Services ➜</a>
+               <a href="{{ route('howitworks') }}" class="btn-ghost">How It Works</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Rounded search card overlapping hero -->
-    <div class="container">
-        <div class="search-card">
-            <div class="field">
-                <label>Area</label>
-                <select name="area">
-                    <option value="">Thimphu Town Center</option>
-                    @include('partials.areas.thimphu', ['default' => 'Thimphu Town Center (core city area)'])
-                </select>
-            </div>
-            <div class="field">
-                <label>Service Type</label>
-                <select>
-                    <option>All Services</option>
-                    <option>Hot Stone Bath</option>
-                    <option>Herbal Steam Bath</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Date</label>
-                <input type="date">
-            </div>
-            <div style="width:120px">
-                <label>Guests</label>
-                <select>
-                    <option>1 Guest</option>
-                    <option>2 Guests</option>
-                </select>
-            </div>
-            <div style="width:160px">
-                <label style="visibility:hidden">Search</label>
-                <button class="btn-hero" style="width:100%">Search Now</button>
-            </div>
-        </div>
-    </div>
+    <!-- Floating search card (overlaps hero) -->
 
     <!-- Benefit strip (trusted, authentic, easy booking, support) -->
     <div class="container">
@@ -582,8 +182,7 @@
     </div>
 
     <!-- Search / Filter Bar -->
-    <div class="container" style="margin-top: -40px;">
-        <div style="background: white; padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); display:flex; gap:12px; align-items:center;">
+    <div class="search-card">
             <div style="flex:1">
                 <label style="display:block;font-size:12px;color:#666;margin-bottom:6px">Area (Thimphu)</label>
                 <select name="area" style="width:100%;padding:10px;border:1px solid #e6e6e6;border-radius:8px">
@@ -616,7 +215,6 @@
                 <label style="display:block;font-size:12px;color:transparent;margin-bottom:6px">Search</label>
                 <button class="btn btn-primary" style="width:100%;">Search Now</button>
             </div>
-        </div>
     </div>
 
     <!-- Browse Services By Category Section -->
@@ -703,28 +301,6 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
-                    <picture>
-                        <source type="image/webp" srcset="/image/optimized/Herbal%20Steam%20Bath-1200.webp 1200w, /image/optimized/Herbal%20Steam%20Bath-800.webp 800w" sizes="(max-width:900px) 100vw, 50vw">
-                        <img src="/image/Herbal Steam Bath.png" alt="Herbal Steam Bath" class="gallery-card-img" loading="lazy" decoding="async" width="560" height="320">
-                    </picture>
-                    <div class="gallery-card-content">
-                        <div>
-                            <div class="gallery-card-title">Herbal Steam Bath</div>
-                            <div class="gallery-card-location">Changzamthang</div>
-                            <div class="gallery-card-description">Detoxify and rejuvenate with herbal steam therapy.</div>
-                        </div>
-                        <div>
-                            <div class="gallery-card-details">
-                                <div class="gallery-card-price">Nu. 900</div>
-                                <div class="gallery-card-capacity">1 Guest</div>
-                            </div>
-                            <div style="margin-top:10px">
-                                <a href="{{ route('services.show', ['service' => 2]) }}" class="gallery-card-btn">View Details ➜</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="gallery-card">
                     <picture>
@@ -749,19 +325,7 @@
                     </div>
                 </div>
 
-                <div class="gallery-card">
-                    <img src="/image/Spa & Massage Therapy.png" alt="Aromatherapy Bath" class="gallery-card-img">
-                    <div class="gallery-card-content">
-                        <div class="gallery-card-title">Aromatherapy Bath</div>
-                        <div class="gallery-card-location">Olakha</div>
-                        <div class="gallery-card-description">Unwind with natural oils and calming aromas.</div>
-                        <div class="gallery-card-details">
-                            <div class="gallery-card-price">Nu. 900</div>
-                            <div class="gallery-card-capacity">1 Guest</div>
-                        </div>
-                        <a href="{{ route('services.show', ['service' => 4]) }}" class="gallery-card-btn">View Details</a>
-                    </div>
-                </div>
+                <!-- Only two featured services as requested: Hot Stone Bath and Medicinal Water -->
             </div>
             <div style="text-align:center;margin-top:1.5rem">
                 <a href="{{ route('services.index') }}" class="btn btn-secondary" style="padding:10px 20px;border-radius:8px;">View All Services</a>
