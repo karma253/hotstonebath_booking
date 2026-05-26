@@ -41,20 +41,20 @@
                 .nav-btn.primary{background:linear-gradient(180deg,var(--brown-600),var(--brown-700));border:none}
 
                 /* Hero */
-                .hero{position:relative;min-height:520px;display:flex;align-items:center;padding:6.2rem 0 2.8rem;overflow:hidden}
-                .hero .hero-bg{position:absolute;inset:0;z-index:0}
+                .hero{position:relative;min-height:600px;display:flex;align-items:center;padding:7rem 0 3rem;overflow:hidden}
+                .hero .hero-bg{position:absolute;inset:0;z-index:0;filter:contrast(0.96) saturate(0.92)}
                 .hero .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:right center;display:block}
-                .hero .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(43,21,15,0.72) 0%,rgba(43,21,15,0.4) 50%,rgba(0,0,0,0.02) 100%);z-index:1}
-                .hero .hero-inner{position:relative;z-index:2;max-width:720px;padding-left:36px}
+                .hero .hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(43,21,15,0.78) 0%,rgba(43,21,15,0.36) 50%,rgba(0,0,0,0.02) 100%);z-index:1}
+                .hero .hero-inner{position:relative;z-index:2;max-width:760px;padding-left:56px;padding-top:36px}
                 .hero .subtitle{font-size:13px;letter-spacing:2.4px;color:var(--gold);font-weight:700;margin-bottom:14px;text-transform:uppercase}
-                .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:3.8rem;color:#fff;line-height:1.02;margin:0 0 14px;text-shadow:0 8px 26px rgba(0,0,0,0.45);font-weight:700}
+                .hero h1{font-family:'Playfair Display',Georgia,serif;font-size:4.4rem;color:#fff;line-height:1.02;margin:0 0 14px;text-shadow:0 10px 36px rgba(0,0,0,0.48);font-weight:700}
                 .hero p{max-width:640px;color:rgba(255,255,255,0.95);margin-bottom:18px;font-size:1.05rem}
                 .cta-buttons{display:flex;gap:14px}
                 .btn-hero{padding:12px 24px;border-radius:8px;background:linear-gradient(180deg,var(--brown-600),var(--brown-700));color:#fff;text-decoration:none;font-weight:800;border:0;box-shadow:0 10px 36px rgba(142,66,34,0.22)}
                 .btn-ghost{padding:10px 18px;border-radius:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.12)}
 
                 /* Search card */
-                .search-card{background:var(--panel);border-radius:16px;padding:18px 22px;box-shadow:0 46px 110px rgba(27,18,12,0.22);max-width:1150px;margin:-100px auto 28px;display:flex;gap:16px;align-items:center;border:1px solid rgba(0,0,0,0.06);position:relative;z-index:60}
+                .search-card{background:var(--panel);border-radius:16px;padding:18px 22px;box-shadow:0 46px 110px rgba(27,18,12,0.22);max-width:1150px;margin:-70px auto 28px;width:calc(100% - 40px);display:flex;gap:16px;align-items:center;border:1px solid rgba(0,0,0,0.06);position:relative;z-index:60;transform:translateY(8px)}
                 .search-card .field{flex:1}
                 .search-card label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
                 .search-card select,.search-card input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #f0eae4;background:#fff}
@@ -90,6 +90,7 @@
                 /* Footer */
                 footer{background:var(--brown-900);color:#f0e6e1;padding:36px 0;margin-top:32px}
                 footer a{color:#f8e9df}
+                footer .logo{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
 
                 /* Responsive */
                 @media(max-width:900px){
@@ -279,7 +280,10 @@
             <h2 style="text-align:center;margin-bottom:1rem">Popular Wellness Services</h2>
             <div class="gallery-grid">
                 <div class="gallery-card">
-                    <img src="/image/hot stone bath.png" alt="Hot Stone Bath" class="gallery-card-img" loading="lazy" decoding="async" width="560" height="320">
+                    <picture>
+                        <source type="image/webp" srcset="/image/optimized/hot%20stone%20bath-1200.webp 1200w, /image/optimized/hot%20stone%20bath-800.webp 800w" sizes="(max-width:900px) 100vw, 50vw">
+                        <img src="/image/hot stone bath.png" alt="Hot Stone Bath" class="gallery-card-img" loading="lazy" decoding="async" width="560" height="320">
+                    </picture>
                     <div class="gallery-card-content">
                         <div class="gallery-card-title">Hot Stone Bath</div>
                         <div class="gallery-card-location">Motithang</div>
