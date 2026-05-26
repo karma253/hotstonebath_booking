@@ -390,26 +390,7 @@
             <div style="display:flex;gap:2rem;justify-content:space-between;flex-wrap:wrap;padding:2rem 0;">
                 
 
-                <div style="min-width:220px;">
-                    <strong>Quick Links</strong>
-                    <ul style="list-style:none;padding:0;margin-top:8px;color:#f0e6e1">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('services.index') }}">Services</a></li>
-                        <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Sign Up</a></li>
-                        <li><a href="/owner/login">Owner Login</a></li>
-                        <li><a href="/owner/register">Owner Register</a></li>
-                        <li><a href="/bookings">My Bookings</a></li>
-                    </ul>
-                </div>
-
-                <div style="min-width:240px;">
-                    <strong>Contact</strong>
-                    <p style="color:#f0e6e1;margin-top:8px">info@drukwellness.bt<br>Thimphu, Bhutan<br>+975 17 123 456</p>
-                    <p style="color:#f0e6e1;margin-top:8px">Mon - Sun: 8:00 AM - 8:00 PM</p>
-                </div>
+                <!-- Footer links and contact removed per user request -->
             </div>
 
             <div style="text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;color:#f0e6e1">&copy; 2024 Druk Wellness Booking System. All rights reserved.</div>
