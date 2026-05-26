@@ -25,11 +25,11 @@
                 body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial;line-height:1.6;color:var(--brown-900);background:var(--cream)}
 
                 /* Header */
-                header{background:linear-gradient(180deg,var(--brown-900),var(--brown-800));color:#fff;padding:12px 0;position:sticky;top:0;z-index:200;backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.03);height:var(--nav-height)}
+                header{background:transparent;color:#fff;padding:12px 0;position:absolute;top:0;left:0;right:0;z-index:220;backdrop-filter:blur(4px);height:var(--nav-height)}
                 .container{max-width:1200px;margin:0 auto;padding:0 20px}
                 .header-content{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
                 .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
-                .brand img{height:36px}
+                .brand img{height:40px}
                 .brand div{color:#fff}
                 .brand .mark{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
                 nav{display:flex;gap:20px;align-items:center}
@@ -40,8 +40,8 @@
                 nav a:hover{opacity:0.95}
                 nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:3px;background:var(--gold);border-radius:2px;width:60%;margin:0 auto}
                 .nav-actions a{margin-left:10px}
-                .nav-btn{padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#fff;text-decoration:none}
-                .nav-btn.primary{background:linear-gradient(180deg,var(--brown-600),var(--brown-700));border:none}
+                .nav-btn{padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;text-decoration:none}
+                .nav-btn.primary{background:linear-gradient(180deg,rgba(182,91,43,0.95),rgba(143,71,36,0.95));border:none}
 
                 /* Hero */
                 .hero{position:relative;min-height:680px;display:flex;align-items:center;padding:8rem 0 3.5rem;overflow:hidden}
