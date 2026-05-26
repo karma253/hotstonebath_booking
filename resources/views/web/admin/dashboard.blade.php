@@ -1,328 +1,400 @@
-@extends('web.layouts.app')
+@extends('layouts.admin-layout')
 
 @section('title', 'Admin Dashboard')
+@section('page-title', 'Dashboard Overview')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 mb-0">Admin Dashboard</h1>
-    <form method="POST" action="{{ route('admin.logout') }}">
-        @csrf
-        <button class="btn btn-dark">Logout</button>
-    </form>
+<div class="page-header">
+    <h1><i class="fas fa-chart-line"></i> Admin Dashboard</h1>
+    <p>System overview and management controls</p>
 </div>
 
-<div class="row g-3 mb-4">
-    <div class="col-md-3">
-        <div class="card card-shadow rounded-4"><div class="card-body"><div class="text-muted">Customers</div><div class="h4 mb-0">{{ $stats['customers'] }}</div></div></div>
+<!-- Stats Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card-icon primary">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-card-label">Total Users</div>
+            <div class="stat-card-value">{{ $stats['customers'] ?? 0 }}</div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <div class="card card-shadow rounded-4"><div class="card-body"><div class="text-muted">Owners</div><div class="h4 mb-0">{{ $stats['owners'] }}</div></div></div>
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card-icon success">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="stat-card-label">Total Owners</div>
+            <div class="stat-card-value">{{ $stats['owners'] ?? 0 }}</div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <div class="card card-shadow rounded-4"><div class="card-body"><div class="text-muted">Bookings</div><div class="h4 mb-0">{{ $stats['bookings'] }}</div></div></div>
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card-icon warning">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-card-label">Total Bookings</div>
+            <div class="stat-card-value">{{ $stats['bookings'] ?? 0 }}</div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <div class="card card-shadow rounded-4"><div class="card-body"><div class="text-muted">Active Listings</div><div class="h4 mb-0">{{ $stats['active_listings'] }}</div></div></div>
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card-icon danger">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-card-label">Total Revenue</div>
+            <div class="stat-card-value">Nu. {{ number_format($totalRevenue ?? 0, 0) }}</div>
+        </div>
     </div>
 </div>
 
-<div class="card card-shadow rounded-4 mb-4">
-    <div class="card-header bg-white"><h2 class="h5 mb-0">Owner Verification</h2></div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-light"><tr><th>Owner</th><th>Email</th><th>Bath</th><th>Status</th><th>Actions</th></tr></thead>
-                <tbody>
-                @forelse($pendingOwners as $owner)
-                    <tr>
-                        <td>{{ $owner->name }}</td>
-                        <td>{{ $owner->email }}</td>
-                        <td>{{ optional($owner->baths->first())->name ?? 'N/A' }}</td>
-                        <td><span class="badge bg-warning text-dark">PENDING</span></td>
-                        <td>
-                            <div class="d-flex gap-2 flex-wrap">
-                                <form method="POST" action="{{ route('admin.owner.approve', $owner) }}">@csrf<button class="btn btn-sm btn-success">Approve</button></form>
-                                <form method="POST" action="{{ route('admin.owner.reject', $owner) }}" class="d-flex gap-1">
-                                    @csrf
-                                    <input type="text" name="reason" class="form-control form-control-sm" placeholder="Reason" required>
-                                    <button class="btn btn-sm btn-danger">Reject</button>
-                                </form>
+<!-- Pending Approvals Section -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-hourglass-half"></i> Pending Approvals</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <!-- Pending Owners -->
+                    <div class="col-md-6">
+                        <div class="border rounded p-3">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 1.5rem;">
+                                    <i class="fas fa-user-clock"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">{{ $pendingOwners->count() }}</div>
+                                    <div style="color: #64748b; font-size: 0.85rem;">Pending Owner Approvals</div>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="5" class="text-center py-4 text-muted">No pending owner requests.</td></tr>
-                @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                            @if($pendingOwners->count() > 0)
+                                <a href="{{ route('admin.users', ['role' => 'owner', 'status' => 'pending_verification']) }}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Review Owners
+                                </a>
+                            @else
+                                <p class="text-muted mb-0 small">No pending approvals</p>
+                            @endif
+                        </div>
+                    </div>
 
-<div class="card card-shadow rounded-4">
-    <div class="card-header bg-white"><h2 class="h5 mb-0">Bath Listing Review</h2></div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-light"><tr><th>Bath Name</th><th>Owner</th><th>Location</th><th>Price</th><th>Actions</th></tr></thead>
-                <tbody>
-                @forelse($pendingListings as $listing)
-                    <tr>
-                        <td>{{ $listing->name }}</td>
-                        <td>{{ optional($listing->owner)->name }}</td>
-                        <td>{{ optional($listing->dzongkhag)->name }}</td>
-                        <td>Nu. {{ number_format((float)($listing->price_per_session ?? $listing->price_per_hour), 2) }}</td>
-                        <td>
-                            <div class="d-flex gap-2 flex-wrap">
-                                <form method="POST" action="{{ route('admin.listing.status', $listing) }}" class="d-flex gap-1">
-                                    @csrf
-                                    <input type="hidden" name="status" value="active">
-                                    <button class="btn btn-sm btn-success">Approve</button>
-                                </form>
-                                <form method="POST" action="{{ route('admin.listing.status', $listing) }}" class="d-flex gap-1">
-                                    @csrf
-                                    <input type="hidden" name="status" value="suspended">
-                                    <input type="text" name="notes" class="form-control form-control-sm" placeholder="Rejection notes">
-                                    <button class="btn btn-sm btn-danger">Reject</button>
-                                </form>
+                    <!-- Pending Listings -->
+                    <div class="col-md-6">
+                        <div class="border rounded p-3">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(16, 185, 129, 0.1); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.5rem;">
+                                    <i class="fas fa-list-check"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">{{ $pendingListings->count() }}</div>
+                                    <div style="color: #64748b; font-size: 0.85rem;">Pending Bath Listings</div>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="5" class="text-center py-4 text-muted">No pending bath listings.</td></tr>
-                @endforelse
-                </tbody>
-            </table>
+                            @if($pendingListings->count() > 0)
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Review Listings
+                                </a>
+                            @else
+                                <p class="text-muted mb-0 small">All listings approved</p>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Pending Services -->
+                    <div class="col-md-6">
+                        <div class="border rounded p-3">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(239, 68, 68, 0.1); display: flex; align-items: center; justify-content: center; color: #ef4444; font-size: 1.5rem;">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">{{ $pendingServices->count() }}</div>
+                                    <div style="color: #64748b; font-size: 0.85rem;">Pending Services</div>
+                                </div>
+                            </div>
+                            @if($pendingServices->count() > 0)
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Review Services
+                                </a>
+                            @else
+                                <p class="text-muted mb-0 small">All services approved</p>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Commission -->
+                    <div class="col-md-6">
+                        <div class="border rounded p-3">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 1.5rem;">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: #1e293b;">Nu. {{ number_format($monthlyCommission ?? 0, 0) }}</div>
+                                    <div style="color: #64748b; font-size: 0.85rem;">Monthly Commission</div>
+                                </div>
+                            </div>
+                            <small class="text-muted">(15% of monthly revenue)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> Quick Stats</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #64748b;"><i class="fas fa-check-circle text-success"></i> Active Listings</span>
+                        <span style="font-weight: 700; font-size: 1.25rem;">{{ $stats['active_listings'] ?? 0 }}</span>
+                    </div>
+                </div>
+                <div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #64748b;"><i class="fas fa-money-bill-wave"></i> Total Revenue</span>
+                        <span style="font-weight: 700; font-size: 1.25rem;">Nu. {{ number_format($totalRevenue ?? 0, 0) }}</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #64748b;"><i class="fas fa-percentage text-primary"></i> Commission</span>
+                        <span style="font-weight: 700; font-size: 1.25rem; color: #2563eb;">Nu. {{ number_format($totalCommission ?? 0, 0) }}</span>
+                    </div>
+                </div>
+                <a href="{{ route('admin.revenue') }}" class="btn btn-sm btn-primary w-100">
+                    <i class="fas fa-chart-bar"></i> View Revenue Report
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="card card-shadow rounded-4 mt-4">
-    <div class="card-header bg-white"><h2 class="h5 mb-0">💳 Recent Transactions - Last 10</h2></div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Transaction ID</th>
-                        <th>Guest Name</th>
-                        <th>Booking ID</th>
-                        <th>Payment Method</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionsTableBody">
-                    <tr>
-                        <td colspan="7" class="text-center py-4 text-muted">Loading transactions...</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer bg-white">
-            <button class="btn btn-sm btn-primary" onclick="refreshTransactions()">Refresh Transactions</button>
-            <button class="btn btn-sm btn-secondary" onclick="exportTransactionsCSV()">Export Report</button>
+<!-- Owner Verification Table -->
+<div class="row g-4 mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-user-check"></i> Owner Verification</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Owner Name</th>
+                            <th>Email</th>
+                            <th>Bath</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($pendingOwners as $owner)
+                            <tr>
+                                <td><strong>{{ $owner->name }}</strong></td>
+                                <td>{{ $owner->email }}</td>
+                                <td>{{ optional($owner->baths->first())->name ?? 'N/A' }}</td>
+                                <td><span class="badge bg-warning text-dark">PENDING</span></td>
+                                <td>
+                                    <div class="d-flex gap-2" style="flex-wrap: wrap;">
+                                        <form method="POST" action="{{ route('admin.owner.approve', $owner) }}" style="display: inline;">
+                                            @csrf
+                                            <button class="btn btn-sm btn-success"><i class="fas fa-check"></i> Approve</button>
+                                        </form>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $owner->id }}">
+                                            <i class="fas fa-times"></i> Reject
+                                        </button>
+                                    </div>
+
+                                    <!-- Reject Modal -->
+                                    <div class="modal fade" id="rejectModal{{ $owner->id }}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Reject Owner</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <form method="POST" action="{{ route('admin.owner.reject', $owner) }}">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Rejection Reason</label>
+                                                            <textarea name="reason" class="form-control" rows="4" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Reject Owner</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    <i class="fas fa-check-circle"></i> No pending owner approvals
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
-<style>
-    .status-success {
-        background-color: #d4edda;
-        color: #155724;
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.85rem;
-    }
+<!-- Bath Listings Table -->
+<div class="row g-4 mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-bath"></i> Bath Listing Verification</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Bath Name</th>
+                            <th>Owner</th>
+                            <th>Location</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($pendingListings as $listing)
+                            <tr>
+                                <td><strong>{{ $listing->name }}</strong></td>
+                                <td>{{ optional($listing->owner)->name }}</td>
+                                <td>{{ optional($listing->dzongkhag)->name }}</td>
+                                <td>Nu. {{ number_format((float)($listing->price_per_session ?? $listing->price_per_hour), 2) }}</td>
+                                <td><span class="badge bg-warning text-dark">PENDING</span></td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                       <form method="POST" action="{{ route('admin.listing.status', $listing) }}" style="display: inline;">
+                                            @csrf
+                                            <input type="hidden" name="status" value="active">
+                                            <button class="btn btn-sm btn-success"><i class="fas fa-check"></i> Approve</button>
+                                        </form>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectListingModal{{ $listing->id }}">
+                                            <i class="fas fa-times"></i> Reject
+                                        </button>
+                                    </div>
 
-    .status-failed {
-        background-color: #f8d7da;
-        color: #721c24;
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.85rem;
-    }
+                                    <!-- Reject Modal -->
+                                    <div class="modal fade" id="rejectListingModal{{ $listing->id }}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Reject Listing</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <form method="POST" action="{{ route('admin.listing.status', $listing) }}">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="suspended">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Notes</label>
+                                                            <textarea name="notes" class="form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Reject Listing</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted">
+                                    <i class="fas fa-check-circle"></i> No pending bath listings
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-    .status-pending {
-        background-color: #fff3cd;
-        color: #856404;
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.85rem;
-    }
+<!-- Recent Transactions -->
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <h5 class="mb-0"><i class="fas fa-receipt"></i> Recent Transactions</h5>
+                <button class="btn btn-sm btn-primary" onclick="refreshTransactions()">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User</th>
+                            <th>Booking ID</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsTableBody">
+                        @forelse($transactions as $transaction)
+                            <tr>
+                                <td><code style="font-size: 0.8rem; background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 3px;">{{ substr($transaction['transaction_id'], 0, 12) }}...</code></td>
+                                <td>{{ $transaction['user_name'] }}</td>
+                                <td>#{{ $transaction['booking_id'] }}</td>
+                                <td><strong>Nu. {{ number_format($transaction['amount'], 2) }}</strong></td>
+                                <td>{{ ucfirst(str_replace('_', ' ', $transaction['payment_method'])) }}</td>
+                                <td>
+                                    @if($transaction['status'] === 'completed')
+                                        <span class="badge bg-success">Completed</span>
+                                    @elseif($transaction['status'] === 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @else
+                                        <span class="badge bg-danger">{{ ucfirst($transaction['status']) }}</span>
+                                    @endif
+                                </td>
+                                <td><small>{{ $transaction['date'] }}</small></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center py-4 text-muted">
+                                    <i class="fas fa-inbox"></i> No transactions found
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-    .transaction-id {
-        font-family: 'Courier New', monospace;
-        background-color: #f5f5f5;
-        padding: 0.25rem 0.5rem;
-        border-radius: 3px;
-        font-size: 0.9rem;
-    }
-</style>
+@endsection
 
+@section('scripts')
 <script>
-    let allTransactions = [];
-    let autoRefreshInterval = null;
-    const serverTransactions = @json($transactions ?? []);
-
-    // Load transactions on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        // Display server transactions immediately (even if empty)
-        if (serverTransactions && serverTransactions.length > 0) {
-            console.log('Displaying server transactions:', serverTransactions.length);
-            displayTransactions(serverTransactions);
-        } else {
-            console.log('No server transactions, showing "No transactions" message');
-            // Show "No transactions" message while loading
-            const tableBody = document.getElementById('transactionsTableBody');
-            tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No transactions found in the system yet.</td></tr>';
-        }
-        
-        // Then fetch fresh data from API
-        loadTransactions();
-        
-        // Setup auto-refresh every 30 seconds
-        startAutoRefresh();
-    });
-
-    function loadTransactions() {
-        // Fetch transactions from web endpoint
-        fetch('/admin/transactions/recent', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Transaction data received:', data);
-            if (data && data.success && data.data && Array.isArray(data.data)) {
-                allTransactions = data.data;
-                displayTransactions(allTransactions);
-            } else {
-                console.warn('Unexpected data format:', data);
-                if (serverTransactions && serverTransactions.length > 0) {
-                    displayTransactions(serverTransactions);
-                } else {
-                    displayTransactions([]);
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching transactions:', error);
-            // Use server-passed transactions on error
-            if (serverTransactions && serverTransactions.length > 0) {
-                displayTransactions(serverTransactions);
-            } else {
-                displayTransactions([]);
-            }
-        });
-    }
-
-    function displayTransactions(transactions) {
-        const tableBody = document.getElementById('transactionsTableBody');
-        
-        if (!transactions || transactions.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No transactions found in the system yet.</td></tr>';
-            return;
-        }
-
-        tableBody.innerHTML = transactions.map(txn => {
-            // Use date formatted by controller or format here
-            const displayDate = txn.date || new Date(txn.created_at).toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric'
-            });
-            
-            return `
-                <tr>
-                    <td><span class="transaction-id">${txn.transaction_id}</span></td>
-                    <td>${txn.user_name || 'N/A'}</td>
-                    <td>${txn.booking_id || 'N/A'}</td>
-                    <td>${txn.payment_method}</td>
-                    <td><strong>Nu. ${parseFloat(txn.amount).toFixed(2)}</strong></td>
-                    <td><span class="status-${txn.status}">${txn.status.charAt(0).toUpperCase() + txn.status.slice(1)}</span></td>
-                    <td><small>${displayDate}</small></td>
-                </tr>
-            `;
-        }).join('');
-    }
-
     function refreshTransactions() {
-        const tableBody = document.getElementById('transactionsTableBody');
-        tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">Refreshing...</td></tr>';
-        
-        setTimeout(() => {
-            loadTransactions();
-        }, 800);
-    }
-
-    function startAutoRefresh() {
-        // Auto-refresh transactions every 30 seconds
-        if (autoRefreshInterval) {
-            clearInterval(autoRefreshInterval);
-        }
-        autoRefreshInterval = setInterval(() => {
-            loadTransactions();
-        }, 30000); // 30 seconds
-    }
-
-    function stopAutoRefresh() {
-        if (autoRefreshInterval) {
-            clearInterval(autoRefreshInterval);
-            autoRefreshInterval = null;
-        }
-    }
-
-    // Stop auto-refresh when user leaves page
-    window.addEventListener('beforeunload', () => {
-        stopAutoRefresh();
-    });
-
-    function exportTransactionsCSV() {
-        if (!allTransactions || allTransactions.length === 0) {
-            alert('No transactions to export');
-            return;
-        }
-
-        let csvContent = 'Transaction ID,Guest Name,Booking ID,Payment Method,Amount,Status,Date\n';
-        allTransactions.forEach(txn => {
-            const displayDate = txn.date || new Date(txn.created_at).toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric'
-            });
-            
-            csvContent += `"${txn.transaction_id}","${txn.user_name || 'N/A'}","${txn.booking_id || 'N/A'}","${txn.payment_method}","Nu. ${txn.amount}","${txn.status}","${displayDate}"\n`;
-        });
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'transactions-' + new Date().toISOString().split('T')[0] + '.csv');
-        link.style.visibility = 'hidden';
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        alert('Transaction report exported successfully! Total: ' + allTransactions.length);
+        location.reload();
     }
 </script>
 @endsection

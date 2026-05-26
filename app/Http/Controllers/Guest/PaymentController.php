@@ -15,7 +15,7 @@ class PaymentController extends Controller
      */
     public function showPaymentMethods($bookingId)
     {
-        $booking = Booking::where('booking_id', $bookingId)->firstOrFail();
+        $booking = Booking::findOrFail($bookingId);
         
         // Only allow payment if booking is pending
         if ($booking->status !== 'pending') {
@@ -58,7 +58,7 @@ class PaymentController extends Controller
      */
     public function showBankingApps($bookingId)
     {
-        $booking = Booking::where('booking_id', $bookingId)->firstOrFail();
+        $booking = Booking::findOrFail($bookingId);
 
         return response()->json([
             'success' => true,
@@ -106,7 +106,7 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            $booking = Booking::where('booking_id', $bookingId)->lockForUpdate()->firstOrFail();
+            $booking = Booking::findOrFail($bookingId);
 
             // Check if booking is still pending
             if ($booking->status !== 'pending') {
@@ -196,7 +196,7 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            $booking = Booking::where('booking_id', $bookingId)->lockForUpdate()->firstOrFail();
+            $booking = Booking::findOrFail($bookingId);
 
             if ($booking->status !== 'pending') {
                 return response()->json([
@@ -255,7 +255,7 @@ class PaymentController extends Controller
         try {
             DB::beginTransaction();
 
-            $booking = Booking::where('booking_id', $bookingId)->lockForUpdate()->firstOrFail();
+            $booking = Booking::findOrFail($bookingId);
             $previousTransaction = Transaction::where('booking_id', $booking->id)
                 ->where('status', 'failed')
                 ->latest()
@@ -323,7 +323,7 @@ class PaymentController extends Controller
      */
     public function getPaymentStatus($bookingId)
     {
-        $booking = Booking::where('booking_id', $bookingId)->firstOrFail();
+        $booking = Booking::findOrFail($bookingId);
         $transaction = Transaction::where('booking_id', $booking->id)->latest()->first();
 
         return response()->json([

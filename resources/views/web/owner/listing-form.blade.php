@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                         <label class="form-label">Listing Status</label>
                         <select name="status" class="form-select">
-                            @php($currentStatus = old('status', $bath?->status ?? 'pending_verification'))
+                            @php($currentStatus = old('status', $bath?->status ?? 'active'))
                             <option value="pending_verification" @selected($currentStatus === 'pending_verification')>Pending Verification</option>
                             <option value="active" @selected($currentStatus === 'active')>Active</option>
                             <option value="inactive" @selected($currentStatus === 'inactive')>Inactive</option>

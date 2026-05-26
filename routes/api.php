@@ -111,12 +111,12 @@ Route::middleware(['auth:sanctum', 'guest'])->group(function () {
 
     // Payments
     Route::prefix('payments')->group(function () {
-        Route::get('methods/{bookingId}', [PaymentController::class, 'showPaymentMethods']);
-        Route::get('banking-apps/{bookingId}', [PaymentController::class, 'showBankingApps']);
-        Route::post('process/{bookingId}', [PaymentController::class, 'processPayment']);
-        Route::post('cash/{bookingId}', [PaymentController::class, 'processCashPayment']);
-        Route::post('retry/{bookingId}', [PaymentController::class, 'retryPayment']);
-        Route::get('status/{bookingId}', [PaymentController::class, 'getPaymentStatus']);
+        Route::get('methods/{bookingId}', [PaymentController::class, 'showPaymentMethods'])->name('api.payments.methods');
+        Route::get('banking-apps/{bookingId}', [PaymentController::class, 'showBankingApps'])->name('api.payments.banking-apps');
+        Route::post('process/{bookingId}', [PaymentController::class, 'processPayment'])->name('api.payments.process');
+        Route::post('cash/{bookingId}', [PaymentController::class, 'processCashPayment'])->name('api.payments.cash');
+        Route::post('retry/{bookingId}', [PaymentController::class, 'retryPayment'])->name('api.payments.retry');
+        Route::get('status/{bookingId}', [PaymentController::class, 'getPaymentStatus'])->name('api.payments.status');
     });
 
     // Reviews

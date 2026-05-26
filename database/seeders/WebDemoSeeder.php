@@ -74,7 +74,7 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Changangkha, Thimphu',
                 'price' => 1100,
                 'max_guests' => 8,
-                'image' => 'https://images.unsplash.com/photo-1544161515-81aae3ff8d23?w=1400',
+                'image' => '/image/Thimphu Wellness Stone Spa.jpg',
             ],
             [
                 'dzongkhag_name' => 'Paro',
@@ -84,7 +84,17 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Taktsang Road, Paro',
                 'price' => 900,
                 'max_guests' => 6,
-                'image' => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1400',
+                'image' => '/image/Paro Traditional Hot Stone Bath.jpg',
+            ],
+            [
+                'dzongkhag_name' => 'Paro',
+                'name' => 'COMO UMA Paro',
+                'short_description' => 'Luxury hot stone spa experience nestled in scenic Paro Valley.',
+                'story' => 'COMO UMA Paro is a premier wellness destination located in the serene Paro Valley, showcasing the finest in Bhutanese hospitality and traditional healing arts. Our luxury spa facility combines ancient hot stone bathing traditions with modern wellness amenities. Overlooking the sacred Tiger\'s Nest Monastery, our sanctuary provides a tranquil retreat where guests experience authentic Bhutanese therapeutic practices. Each session is personalized to balance the body\'s natural elements using carefully selected heated stones and premium aromatic herbs sourced from the pristine Paro region.',
+                'full_address' => 'Paro Valley, Paro',
+                'price' => 1200,
+                'max_guests' => 8,
+                'image' => '/image/COMO UMA Paro.jpg',
             ],
             [
                 'dzongkhag_name' => 'Punakha',
@@ -94,7 +104,7 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Khuruthang, Punakha',
                 'price' => 850,
                 'max_guests' => 5,
-                'image' => 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=1400',
+                'image' => '/image/Punakha Valley Herbal Bath.jpg',
             ],
             [
                 'dzongkhag_name' => 'Wangdue Phodrang',
@@ -104,7 +114,7 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Riverside, Wangdue Phodrang',
                 'price' => 950,
                 'max_guests' => 7,
-                'image' => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1400',
+                'image' => '/image/Wangdue Riverside Hot Stone Bath.jpg',
             ],
             [
                 'dzongkhag_name' => 'Chhukha',
@@ -114,7 +124,7 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Phuntsholing, Chhukha',
                 'price' => 875,
                 'max_guests' => 6,
-                'image' => 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=1400',
+                'image' => '/image/Chhukha Mineral Bath House.jpg',
             ],
             [
                 'dzongkhag_name' => 'Bumthang',
@@ -124,7 +134,17 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Jakar, Bumthang',
                 'price' => 1050,
                 'max_guests' => 7,
-                'image' => 'https://images.unsplash.com/photo-1544161515-81aae3ff8d23?w=1400',
+                'image' => '/image/Bumthang Premium Stone Bath.jpg',
+            ],
+            [
+                'dzongkhag_name' => 'Bumthang',
+                'name' => 'Amankora Bumthang Lodge',
+                'short_description' => 'Traditional healing bath house nestled in Bumthang valley.',
+                'story' => 'Amankora Bumthang Lodge is a sacred healing sanctuary dedicated to preserving the ancient hot stone bathing traditions of Bumthang Valley. Located near the spiritual temples of this holiest region in Bhutan, our bath house practices time-honored therapeutic methods passed down through generations of local healers. Each session is designed to balance body, mind, and spirit using naturally heated stones and aromatic herbs collected from the pristine Bumthang mountains. We believe in the power of authentic Bhutanese wellness traditions.',
+                'full_address' => 'Amankora, Bumthang',
+                'price' => 950,
+                'max_guests' => 6,
+                'image' => '/image/Amankora bumthang lodge.jpg',
             ],
             [
                 'dzongkhag_name' => 'Trongsa',
@@ -134,7 +154,7 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Trongsa Town, Trongsa',
                 'price' => 900,
                 'max_guests' => 6,
-                'image' => 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=1400',
+                'image' => '/image/Trongsa Heritage Bath Center.jpg',
             ],
             [
                 'dzongkhag_name' => 'Mongar',
@@ -144,7 +164,27 @@ class WebDemoSeeder extends Seeder
                 'full_address' => 'Mongar Town, Mongar',
                 'price' => 925,
                 'max_guests' => 6,
-                'image' => 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1400',
+                'image' => '/image/Mongar Wellness Retreat.jpg',
+            ],
+            [
+                'dzongkhag_name' => 'Chhukha',
+                'name' => 'Chhukha Natural Hot Spring Sanctuary',
+                'short_description' => 'Experience the healing power of natural hot spring water with mineral-rich therapeutic benefits.',
+                'story' => 'Deep in the valleys of Chhukha, ancient natural hot springs have flowed from the earth for thousands of years. Local communities have revered these waters as sacred, blessed with natural minerals that heal and rejuvenate. Our sanctuary was created to celebrate and share this natural treasure. Unlike heated stone baths, our natural hot springs contain naturally occurring minerals including sulfur, iron, and magnesium—elements that have been proven by traditional Bhutanese medicine to cure various ailments and promote overall wellness. Every bath session connects you with the earth\'s ancient healing energy.',
+                'full_address' => 'Hot Spring Valley, Chhukha',
+                'price' => 1000,
+                'max_guests' => 10,
+                'image' => '/image/Duenmang Hot Spring.jpg',
+            ],
+            [
+                'dzongkhag_name' => 'Bumthang',
+                'name' => 'Bumthang Medicinal Healing Bath House',
+                'short_description' => 'Traditional medicinal water bath blended with rare healing herbs for therapeutic wellness.',
+                'story' => 'Bumthang is known throughout Bhutan as the land of medicinal traditions. Our healing bath house sits where ancient medicinal plants grow wild and where traditional healers have apprenticed for generations. We specialize in medicinal water baths—where purified water is enhanced with rare herbs, minerals, and natural remedies collected from Bumthang\'s pristine mountains. Unlike other bath houses, our focus is purely therapeutic healing. Each session is customized based on guest needs, using time-tested herbal combinations that have served Bhutanese families for centuries. Our healers are trained in traditional Bhutanese medicine practices.',
+                'full_address' => 'Healing Valley, Bumthang',
+                'price' => 1150,
+                'max_guests' => 5,
+                'image' => '/image/Medicinal Water Bath.jpg',
             ],
         ];
 
@@ -179,74 +219,7 @@ class WebDemoSeeder extends Seeder
                 ]
             );
 
-            // Add multiple bath services
-            $services = [
-                [
-                    'service_type' => 'Traditional Hotstone Bath',
-                    'description' => 'A traditional hot stone bath is a natural way of bathing where heated stones are placed in water to make it warm. People sit in the warm water to relax their body and relieve stress or body pain. Sometimes herbs are added to make it more soothing. It is simple, relaxing, and good for health.',
-                    'duration_minutes' => 60,
-                    'price' => $data['price'],
-                    'max_guests' => $data['max_guests'],
-                ],
-                [
-                    'service_type' => 'Herbal Hotstone',
-                    'description' => 'Hot stone bath infused with traditional herbal blends for enhanced relaxation and rejuvenation. Located in ' . optional($bath->dzongkhag)->name . '. Ideal for wellness seekers.',
-                    'duration_minutes' => 75,
-                    'price' => $data['price'] + 200,
-                    'max_guests' => $data['max_guests'],
-                ],
-                [
-                    'service_type' => 'Medicinal Water Bath',
-                    'description' => 'Therapeutic bath with medicinal water and minerals for wellness benefits. Experience traditional healing at ' . $data['name'] . ' in ' . optional($bath->dzongkhag)->name . '.',
-                    'duration_minutes' => 60,
-                    'price' => $data['price'] + 100,
-                    'max_guests' => $data['max_guests'],
-                ],
-                [
-                    'service_type' => 'Oil Bath',
-                    'description' => 'Luxurious bath with aromatic oils and hot stone massage therapy. Premium wellness experience at ' . $data['name'] . '. A must-try Bhutanese spa treatment.',
-                    'duration_minutes' => 90,
-                    'price' => $data['price'] + 300,
-                    'max_guests' => $data['max_guests'] - 1,
-                ],
-                [
-                    'service_type' => 'Herbal Steam / Wellness Bath',
-                    'description' => 'Rejuvenating steam bath combined with herbal therapies. Located at ' . $data['name'] . ' in ' . optional($bath->dzongkhag)->name . '. Perfect for complete wellness.',
-                    'duration_minutes' => 75,
-                    'price' => $data['price'] + 150,
-                    'max_guests' => $data['max_guests'],
-                ],
-                [
-                    'service_type' => 'Foot Bath',
-                    'description' => 'Relaxing foot soak with hot stones and therapeutic herbs. Enjoy this soothing treatment at ' . $data['name'] . ' in ' . optional($bath->dzongkhag)->name . '.',
-                    'duration_minutes' => 45,
-                    'price' => $data['price'] - 300,
-                    'max_guests' => $data['max_guests'],
-                ],
-                [
-                    'service_type' => 'Relaxing Hot Stone Bath',
-                    'description' => 'Premium hot stone bath designed for ultimate relaxation and stress relief. Experience tranquility at ' . $data['name'] . ' in ' . optional($bath->dzongkhag)->name . '.',
-                    'duration_minutes' => 120,
-                    'price' => $data['price'] + 500,
-                    'max_guests' => $data['max_guests'] - 2,
-                ],
-                [
-                    'service_type' => 'Detox Steam Bath',
-                    'description' => 'Detoxifying steam bath with natural herbs and minerals. Purify your body and mind at ' . $data['name'] . ' in ' . optional($bath->dzongkhag)->name . '.',
-                    'duration_minutes' => 60,
-                    'price' => $data['price'] + 250,
-                    'max_guests' => $data['max_guests'],
-                ],
-            ];
-
-            foreach ($services as $serviceData) {
-                BathService::query()->firstOrCreate(
-                    ['bath_id' => $bath->id, 'service_type' => $serviceData['service_type']],
-                    array_merge($serviceData, [
-                        'is_available' => true,
-                    ])
-                );
-            }
+            // Services will be added by owners in their dashboard
 
             foreach (['Changing Room', 'Towels', 'Herbal Bath', 'Private Area'] as $facility) {
                 BathFacility::query()->firstOrCreate([

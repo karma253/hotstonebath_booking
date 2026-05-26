@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DzongkhagSeeder::class,
             WebDemoSeeder::class,
+            MultipleOwnersSeeder::class,
+            MultipleGuestsSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

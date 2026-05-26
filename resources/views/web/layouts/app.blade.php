@@ -260,6 +260,7 @@
         }
     </style>
     @stack('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -273,9 +274,9 @@
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav mx-auto gap-lg-2">
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#how-to-book">How to Book</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#about-us">About Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('how.to.book') }}">How to Book</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('about.us') }}">About Us</a></li>
             </ul>
             <div class="d-flex gap-2 ms-lg-3 align-items-center">
                 @auth

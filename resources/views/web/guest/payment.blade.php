@@ -252,7 +252,7 @@ async function processDigitalPayment() {
         payBtnText.textContent = 'Processing...';
         errorDiv.style.display = 'none';
 
-        const response = await fetch('{{ route("api.payments.process", $booking->booking_id) }}', {
+        const response = await fetch('{{ route("guest.payment.digital", $booking) }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ async function processDigitalPayment() {
 
 async function processCashPayment() {
     try {
-        const response = await fetch('{{ route("api.payments.cash", $booking->id) }}', {
+        const response = await fetch('{{ route("guest.payment.cash", $booking) }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

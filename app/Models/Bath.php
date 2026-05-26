@@ -15,6 +15,7 @@ class Bath extends Model
         'owner_id',
         'name',
         'property_type',
+        'bath_type',
         'dzongkhag_id',
         'full_address',
         'latitude',
@@ -31,6 +32,7 @@ class Bath extends Model
         'price_per_session',
         'booking_type',
         'cancellation_policy',
+        'available_days',
         'status',
         'verified_at',
         'verification_notes',
@@ -40,6 +42,7 @@ class Bath extends Model
         'license_issue_date' => 'date',
         'license_expiry_date' => 'date',
         'verified_at' => 'datetime',
+        'available_days' => 'array',
     ];
 
     public function owner(): BelongsTo
