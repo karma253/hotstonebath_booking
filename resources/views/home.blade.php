@@ -388,10 +388,7 @@
     <footer>
         <div class="container">
             <div style="display:flex;gap:2rem;justify-content:space-between;flex-wrap:wrap;padding:2rem 0;">
-                <div style="min-width:220px;">
-                    <div class="logo">🛁 Druk Wellness</div>
-                    <p style="color:#f0e6e1;margin-top:8px;max-width:320px">Your trusted platform for discovering and booking traditional Bhutanese wellness baths and services in Thimphu.</p>
-                </div>
+                
 
                 <div style="min-width:220px;">
                     <strong>Quick Links</strong>
