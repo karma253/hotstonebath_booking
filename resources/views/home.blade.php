@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Druk Wellness Booking System</title>
+    <title>Wellness Booking</title>
         <link rel="preload" as="image" href="/image/Six Senses Thimphu.jpg">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -393,7 +393,7 @@
                 <!-- Footer links and contact removed per user request -->
             </div>
 
-            <div style="text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;color:#f0e6e1">&copy; 2024 Druk Wellness Booking System. All rights reserved.</div>
+            <div style="text-align:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;color:#f0e6e1"></div>
         </div>
     </footer>
 </body>
